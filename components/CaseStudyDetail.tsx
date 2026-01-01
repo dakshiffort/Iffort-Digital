@@ -1,64 +1,18 @@
-import React, { useEffect } from 'react';
-import { X, ArrowRight, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { CaseStudy } from '../types';
 
 interface CaseStudyDetailProps {
   study: CaseStudy;
-  onClose: () => void;
 }
 
-const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study, onClose }) => {
-  useEffect(() => {
-    // Lock body scroll when component mounts
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
-
-  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    onClose();
-    // Allow state update to propagate before scrolling
-    setTimeout(() => {
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = contactSection.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }, 100);
-  };
+const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
 
   return (
-    <div className="fixed inset-0 z-[100] bg-white overflow-y-auto animate-in fade-in slide-in-from-bottom-4 duration-300">
-      
-      {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md border-b border-gray-100 z-[110] px-6 py-4 flex justify-between items-center transition-all">
-        <div className="flex items-center gap-2 text-slate-900 font-bold text-xl tracking-tighter cursor-pointer" onClick={onClose}>
-          iffort<span className="text-iffort-pink">.</span>
-          <span className="text-gray-400 font-medium text-sm ml-2 hidden md:inline-block border-l border-gray-300 pl-3">Case Study</span>
-        </div>
-        <button 
-          onClick={onClose}
-          className="group flex items-center gap-3 text-sm font-bold text-slate-500 hover:text-iffort-pink transition-colors uppercase tracking-widest"
-        >
-          Close Project
-          <span className="bg-slate-100 p-2 rounded-full group-hover:bg-iffort-pink/10 group-hover:text-iffort-pink transition-colors">
-            <X size={20} />
-          </span>
-        </button>
-      </nav>
-
+    <div className="min-h-screen bg-white overflow-y-auto animate-in fade-in slide-in-from-bottom-4 duration-300">
       {/* Hero Section */}
-      <header className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden mt-0">
+      <header className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden mt-16">
         <img 
           src={study.image} 
           alt={study.client} 
@@ -186,19 +140,18 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study, onClose }) => 
                We don't use templates. We build custom engines. Let's discuss how we can engineer a growth model for {study.client === 'Reckitt Benckiser' ? 'your brand' : 'you'}.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a 
-                href="#contact" 
-                onClick={handleContactClick}
+              <Link
+                to="/#contact"
                 className="bg-iffort-pink text-white text-lg px-10 py-4 rounded-full font-bold hover:bg-pink-600 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-3"
               >
                 Start a Project <ArrowRight size={20} />
-              </a>
-              <button 
-                onClick={onClose}
+              </Link>
+              <Link
+                to="/#work"
                 className="px-10 py-4 rounded-full font-bold text-slate-600 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all"
               >
                 View More Work
-              </button>
+              </Link>
             </div>
          </div>
       </footer>

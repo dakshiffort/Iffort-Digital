@@ -1,25 +1,28 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import LogoMarquee from './components/LogoMarquee';
-import Services from './components/Services';
-import ProprietaryFramework from './components/ProprietaryFramework';
-import CaseStudies from './components/CaseStudies';
-import Footer from './components/Footer';
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import CaseStudyPage from './pages/CaseStudyPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const App: React.FC = () => {
+  const location = useLocation();
+
+  // Scroll to top on route change (except for hash navigation)
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
+
   return (
-    <div className="min-h-screen bg-iffort-dark text-white selection:bg-iffort-pink selection:text-white">
-      <Navbar />
-      <main>
-        <Hero />
-        <LogoMarquee />
-        <Services />
-        <ProprietaryFramework />
-        <CaseStudies />
-      </main>
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path=":caseStudyId" element={<CaseStudyPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 };
 

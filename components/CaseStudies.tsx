@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CASE_STUDIES } from '../constants';
-import { CaseStudy } from '../types';
 import { ArrowUpRight } from 'lucide-react';
-import CaseStudyDetail from './CaseStudyDetail';
 
 const CaseStudies: React.FC = () => {
-  const [selectedStudy, setSelectedStudy] = useState<CaseStudy | null>(null);
+  const navigate = useNavigate();
 
   return (
     <section id="work" className="py-24 bg-white border-t border-gray-100">
@@ -28,10 +27,10 @@ const CaseStudies: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {CASE_STUDIES.map((study) => (
-            <div 
-              key={study.id} 
+            <div
+              key={study.id}
               className="group cursor-pointer bg-slate-50 rounded-2xl overflow-hidden border border-gray-200 hover:shadow-2xl hover:border-iffort-pink/20 transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
-              onClick={() => setSelectedStudy(study)}
+              onClick={() => navigate(`/${study.id}`)}
             >
               <div className="relative h-64 overflow-hidden">
                 <img 
@@ -71,14 +70,6 @@ const CaseStudies: React.FC = () => {
           ))}
         </div>
       </div>
-
-      {/* Full Page Case Study Detail */}
-      {selectedStudy && (
-        <CaseStudyDetail 
-          study={selectedStudy} 
-          onClose={() => setSelectedStudy(null)} 
-        />
-      )}
     </section>
   );
 };

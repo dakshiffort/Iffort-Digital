@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../constants';
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -17,6 +20,14 @@ const Navbar: React.FC = () => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
+
+    // If on case study page, navigate to homepage first
+    if (location.pathname !== '/') {
+      navigate(`/#${targetId}`);
+      return;
+    }
+
+    // If on homepage, scroll
     const element = document.getElementById(targetId);
     if (element) {
       const offset = 80; // Sticky header height
@@ -33,15 +44,37 @@ const Navbar: React.FC = () => {
     }
   };
 
+  // Handle hash navigation after route changes (only on homepage)
+  useEffect(() => {
+    if (location.hash && location.pathname === '/') {
+      const targetId = location.hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  }, [location]);
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-iffort-navy/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <Link to="/" className="flex items-center gap-2">
           <div className="text-3xl font-bold tracking-tighter text-white">
             iffort<span className="text-iffort-pink">.</span>
           </div>
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">

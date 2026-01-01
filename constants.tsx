@@ -54,7 +54,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: 'Asset', value: 'Unified Brand' }
     ],
     tags: ['Rebranding', 'Design System', 'Deep-Tech'],
-    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/mozark-case-study.png',
     content: {
       challenge: 'While Mozark possessed sophisticated product suites, their brand identity was rooted in startup origins. Visual fragmentation made it difficult for customers to perceive their products as an integrated ecosystem, hindering enterprise contracts with Tier-1 Telcos.',
       approach: 'We engineered a scalable 4-Pillar Strategic Framework rooted in their operational philosophy: Measure, Observe, Care, and Act. We implemented a product-led color recognition system and a modular visual architecture symbolizing interoperability.',
