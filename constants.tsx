@@ -140,26 +140,27 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'reckitt',
     client: 'Reckitt Benckiser',
-    category: 'FMCG & Digital Transformation',
-    title: 'Driving Digital Excellence for a Global FMCG Leader',
-    description: 'Case Study coming soon: Partnering with Reckitt to drive digital innovation and market penetration strategies.',
+    category: 'FMCG & Event Marketing',
+    title: 'From Conversions to Acquisitions: Driving Growth for a Leading Hygiene Brand at DWTC',
+    description: 'Introducing RB’s cleaning solutions to decision-makers in Hospitality and F&B through a strategic, 45-day multi-touch campaign and exclusive event.',
     stats: [
-      { label: 'Impact', value: 'TBD' },
-      { label: 'Region', value: 'Global' }
+      { label: 'Qualified Leads', value: '55+' },
+      { label: 'Attendees', value: '15+ CXOs' },
+      { label: 'Campaign', value: '45 Days' }
     ],
-    tags: ['FMCG', 'Digital Strategy', 'Innovation'],
-    image: 'https://picsum.photos/seed/reckitt/800/600',
+    tags: ['ABM', 'Event Marketing', 'Lead Gen'],
+    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2070&auto=format&fit=crop',
     content: {
-      challenge: 'Placeholder: This section will detail the specific market challenges and digital hurdles faced by Reckitt Benckiser.',
-      approach: 'Placeholder: This section will outline the strategic approach, digital frameworks, and execution methodologies employed.',
-      result: 'Placeholder: This section will highlight the key performance indicators, growth metrics, and overall business impact delivered.',
+      challenge: 'RB needed to reach niche decision-makers (CXOs, Facility Managers) in the Hospitality and F&B sectors. The challenge was establishing clear value to encourage these busy leaders to attend an offline "Business Breakfast" at DWTC.',
+      approach: 'We executed a 45-day multi-touch campaign including AI-powered data scraping, cold calling, and LinkedIn ABM. We managed the entire offline experience, including sales collaterals and logistics, to ensure a premium engagement.',
+      result: 'Generated 55+ qualified leads (27% Hospitality, 23% F&B, 23% Cleaning). We successfully convened 15+ client-side decision-makers at the event, creating a direct pipeline for RB’s professional solutions.',
+      quote: "We didn't just generate leads; we engineered a high-value networking marketplace."
     }
   }
 ];
 
 export const NAV_LINKS = [
   { name: 'Services', href: '#services' },
-  { name: 'Our Framework', href: '#framework' },
+  { name: 'Framework', href: '#framework' },
   { name: 'Work', href: '#work' },
-  { name: 'Contact', href: '#contact' },
 ];

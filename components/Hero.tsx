@@ -2,6 +2,23 @@ import React from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background Graphic Elements */}
@@ -29,6 +46,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 relative z-30">
             <a 
               href="#contact" 
+              onClick={(e) => handleScrollTo(e, 'contact')}
               className="group bg-iffort-pink text-white text-lg font-bold px-8 py-4 rounded-full flex items-center justify-center gap-2 transition-all hover:bg-pink-600 hover:shadow-[0_0_30px_rgba(255,46,99,0.4)] cursor-pointer"
             >
               Start the Conversation
@@ -36,6 +54,7 @@ const Hero: React.FC = () => {
             </a>
             <a 
               href="#work" 
+              onClick={(e) => handleScrollTo(e, 'work')}
               className="group border border-white/20 hover:border-white/60 text-white text-lg font-semibold px-8 py-4 rounded-full flex items-center justify-center transition-all hover:bg-white/5 cursor-pointer"
             >
               View Our Work
