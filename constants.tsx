@@ -45,7 +45,7 @@ export const CLIENTS: string[] = [
 export const CASE_STUDIES: CaseStudy[] = [
   {
     id: 'mozark',
-    client: 'Mozark',
+    client: 'Deep-Tech Leader',
     category: 'Rebranding & Deep-Tech',
     title: 'Rebranding a Deep-Tech Leader for Global Enterprise Dominance',
     description: 'Transitioning a brand identity from a niche "Network Testing" utility to a holistic, enterprise-grade Global Digital Intelligence Powerhouse.',
@@ -64,7 +64,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: 'shrm',
-    client: 'SHRM India',
+    client: 'Global HRTech Giant',
     category: 'Lead Gen & HRTech',
     title: 'Scaling the Giants: A Blueprint for Global HRTech Dominance',
     description: 'Achieving predictable, high-intent growth in two of the world\'s most competitive emerging markets (India & MENA).',
@@ -83,7 +83,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: 'cowrks',
-    client: 'Cowrks',
+    client: 'Premium Coworking Brand',
     category: 'Performance & Revenue',
     title: 'Scaling Revenue & Lead Quality for a Premium Coworking Leader',
     description: 'Transforming digital presence into a high-efficiency revenue engine, achieving 5X ROAS in less than one year.',
@@ -103,7 +103,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: 'hp',
-    client: 'HP India',
+    client: 'Enterprise IT Leader',
     category: 'Content Strategy & Events',
     title: 'Defining the Narrative for a Global IT Leader’s Flagship Event',
     description: 'Serving as the Content Fulfillment Center to develop the strategic DNA for a massive enterprise event.',
@@ -121,7 +121,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: 'channelplay',
-    client: 'Channelplay',
+    client: 'Retail Distribution Platform',
     category: 'B2B Lead Engine',
     title: 'Engineering a Global B2B Lead Engine for Retail & Distribution',
     description: 'Building a consistent pipeline for high-value service contracts and proprietary tech solutions across India and MENA.',
@@ -139,7 +139,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: 'reckitt',
-    client: 'Reckitt Benckiser',
+    client: 'Global Hygiene Brand',
     category: 'FMCG & Event Marketing',
     title: 'From Conversions to Acquisitions: Driving Growth for a Leading Hygiene Brand at DWTC',
     description: 'Introducing RB’s cleaning solutions to decision-makers in Hospitality and F&B through a strategic, 45-day multi-touch campaign and exclusive event.',

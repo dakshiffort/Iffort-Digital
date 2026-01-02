@@ -10,7 +10,7 @@ interface CaseStudyDetailProps {
 const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
 
   return (
-    <div className="min-h-screen bg-white overflow-y-auto animate-in fade-in slide-in-from-bottom-4 duration-300">
+    <div className="min-h-screen bg-white overflow-y-auto">
       {/* Hero Section */}
       <header className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden mt-16">
         <img 
@@ -137,7 +137,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
          <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-4xl font-bold text-slate-900 mb-6">Ready to replicate these results?</h2>
             <p className="text-slate-500 mb-10 text-xl max-w-2xl mx-auto">
-               We don't use templates. We build custom engines. Let's discuss how we can engineer a growth model for {study.client === 'Reckitt Benckiser' ? 'your brand' : 'you'}.
+               We don't use templates. We build custom engines. Let's discuss how we can engineer a growth model for {study.client === 'Global Hygiene Brand' ? 'your brand' : 'you'}.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link

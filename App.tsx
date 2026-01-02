@@ -8,10 +8,14 @@ import NotFoundPage from './pages/NotFoundPage';
 const App: React.FC = () => {
   const location = useLocation();
 
-  // Scroll to top on route change (except for hash navigation)
+  // Scroll to top on route change (except for hash navigation) - instant, no animation
   useEffect(() => {
     if (!location.hash) {
-      window.scrollTo(0, 0);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant'
+      });
     }
   }, [location.pathname]);
 

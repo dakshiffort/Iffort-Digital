@@ -20,8 +20,51 @@ const CaseStudies: React.FC = () => {
             </p>
           </div>
           <div className="hidden md:block">
-            {/* Decorative Element */}
-             <div className="w-24 h-24 rounded-full border-4 border-iffort-blue border-t-transparent animate-spin"></div>
+            {/* Animated Growth Chart */}
+            <svg
+              viewBox="0 0 96 96"
+              className="w-24 h-24 chart-animation"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Background Grid (subtle) */}
+              <defs>
+                <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#00C9FF" />
+                  <stop offset="100%" stopColor="#FF2E63" />
+                </linearGradient>
+              </defs>
+
+              {/* Grid lines */}
+              <line x1="0" y1="24" x2="96" y2="24" stroke="white" strokeOpacity="0.05" strokeWidth="1" />
+              <line x1="0" y1="48" x2="96" y2="48" stroke="white" strokeOpacity="0.05" strokeWidth="1" />
+              <line x1="0" y1="72" x2="96" y2="72" stroke="white" strokeOpacity="0.05" strokeWidth="1" />
+
+              {/* Upward trend line - bezier curve */}
+              <path
+                d="M 12 76 Q 32 68, 48 48 T 84 20"
+                fill="none"
+                stroke="url(#chartGradient)"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="chart-line"
+                style={{
+                  strokeDasharray: 200,
+                  strokeDashoffset: 200,
+                  animation: 'drawChart 2s ease-out forwards, pulseGlow 3s ease-in-out infinite 2s'
+                }}
+              />
+
+              {/* Data point dots */}
+              <circle cx="12" cy="76" r="3" fill="#00C9FF" className="chart-dot" style={{ animation: 'fadeIn 0.5s ease-out 1.5s forwards', opacity: 0 }} />
+              <circle cx="48" cy="48" r="3" fill="#00C9FF" className="chart-dot" style={{ animation: 'fadeIn 0.5s ease-out 1.8s forwards', opacity: 0 }} />
+              <circle cx="84" cy="20" r="3" fill="#FF2E63" className="chart-dot" style={{ animation: 'fadeIn 0.5s ease-out 2.1s forwards', opacity: 0 }} />
+
+              {/* White centers for depth */}
+              <circle cx="12" cy="76" r="1.5" fill="white" style={{ animation: 'fadeIn 0.5s ease-out 1.5s forwards', opacity: 0 }} />
+              <circle cx="48" cy="48" r="1.5" fill="white" style={{ animation: 'fadeIn 0.5s ease-out 1.8s forwards', opacity: 0 }} />
+              <circle cx="84" cy="20" r="1.5" fill="white" style={{ animation: 'fadeIn 0.5s ease-out 2.1s forwards', opacity: 0 }} />
+            </svg>
           </div>
         </div>
 

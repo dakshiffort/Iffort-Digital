@@ -9,6 +9,9 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // Check if we're on a case study page
+  const isCaseStudyPage = location.pathname !== '/';
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -67,13 +70,11 @@ const Navbar: React.FC = () => {
   }, [location]);
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-iffort-navy/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled || isCaseStudyPage ? 'bg-iffort-navy/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="text-3xl font-bold tracking-tighter text-white">
-            iffort<span className="text-iffort-pink">.</span>
-          </div>
+          <img src="/assets/Iffort-Logo-1344x573-white.png" alt="iffort" className="h-8 w-auto" />
         </Link>
 
         {/* Desktop Menu */}

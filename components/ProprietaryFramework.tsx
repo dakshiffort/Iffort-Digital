@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Target, Compass, Zap, BarChart3 } from 'lucide-react';
+import ParticleFlowSystem from './ParticleFlowSystem';
 
 const ProprietaryFramework: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [hoveredNode, setHoveredNode] = useState<'blue' | 'pink' | 'green' | 'purple' | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -60,9 +62,12 @@ const ProprietaryFramework: React.FC = () => {
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-iffort-pink/20 to-transparent -rotate-45 transform"></div>
           </div>
 
+          {/* Particle Flow System */}
+          <ParticleFlowSystem isVisible={isVisible} hoveredNode={hoveredNode} />
+
           {/* Central Nucleus (The Hub) */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 h-64 flex flex-col items-center justify-center bg-iffort-dark border border-white/10 rounded-full shadow-[0_0_60px_rgba(0,0,0,0.5)] transition-all duration-1000 ${isVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}>
-             <div className="absolute inset-2 border border-white/5 rounded-full"></div>
+          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 h-64 flex flex-col items-center justify-center bg-iffort-dark border border-white/10 rounded-full shadow-[0_0_60px_rgba(0,0,0,0.5)] transition-all duration-1000 animate-[hubPulse_3s_ease-in-out_infinite] ${isVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}>
+             <div className="absolute inset-2 border border-white/5 rounded-full animate-[hubInnerRing_3s_ease-in-out_infinite]"></div>
              <div className="text-center px-4">
                <span className="block text-xs font-bold text-iffort-blue tracking-[0.3em] uppercase mb-3">Predictable</span>
                <span className="block text-4xl font-bold text-white tracking-tight leading-none mb-1">GROWTH</span>
@@ -74,7 +79,11 @@ const ProprietaryFramework: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-12 md:gap-y-32 w-full h-full relative z-10">
             
             {/* Node 1: Top Left */}
-            <div className={`flex flex-col md:items-end md:text-right transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+            <div
+              className={`flex flex-col md:items-end md:text-right transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+              onMouseEnter={() => setHoveredNode('blue')}
+              onMouseLeave={() => setHoveredNode(null)}
+            >
                <div className="flex items-center gap-4 mb-4 md:flex-row-reverse">
                   <div className="w-12 h-12 bg-iffort-blue/10 border border-iffort-blue/20 rounded-xl flex items-center justify-center text-iffort-blue">
                     <Compass size={24} />
@@ -88,7 +97,11 @@ const ProprietaryFramework: React.FC = () => {
             </div>
 
             {/* Node 2: Top Right */}
-            <div className={`flex flex-col md:items-start md:text-left transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+            <div
+              className={`flex flex-col md:items-start md:text-left transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+              onMouseEnter={() => setHoveredNode('pink')}
+              onMouseLeave={() => setHoveredNode(null)}
+            >
                <div className="flex items-center gap-4 mb-4">
                   <div className="w-12 h-12 bg-iffort-pink/10 border border-iffort-pink/20 rounded-xl flex items-center justify-center text-iffort-pink">
                     <Target size={24} />
@@ -102,7 +115,11 @@ const ProprietaryFramework: React.FC = () => {
             </div>
 
              {/* Node 4: Bottom Left (Swapped Logic for Visual Balance, Logical Flow follows Clockwise) */}
-             <div className={`flex flex-col md:items-end md:text-right transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+             <div
+               className={`flex flex-col md:items-end md:text-right transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+               onMouseEnter={() => setHoveredNode('purple')}
+               onMouseLeave={() => setHoveredNode(null)}
+             >
                <div className="flex items-center gap-4 mb-4 md:flex-row-reverse">
                   <div className="w-12 h-12 bg-purple-500/10 border border-purple-500/20 rounded-xl flex items-center justify-center text-purple-400">
                     <BarChart3 size={24} />
@@ -116,7 +133,11 @@ const ProprietaryFramework: React.FC = () => {
             </div>
 
             {/* Node 3: Bottom Right */}
-            <div className={`flex flex-col md:items-start md:text-left transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+            <div
+              className={`flex flex-col md:items-start md:text-left transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+              onMouseEnter={() => setHoveredNode('green')}
+              onMouseLeave={() => setHoveredNode(null)}
+            >
                <div className="flex items-center gap-4 mb-4">
                   <div className="w-12 h-12 bg-green-500/10 border border-green-500/20 rounded-xl flex items-center justify-center text-green-400">
                     <Zap size={24} />
