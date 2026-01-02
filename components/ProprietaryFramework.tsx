@@ -52,8 +52,8 @@ const ProprietaryFramework: React.FC = () => {
         </div>
 
         {/* The X-Grid Layout */}
-        <div className="relative max-w-6xl mx-auto min-h-[600px] flex items-center justify-center">
-          
+        <div className="relative max-w-7xl mx-auto min-h-[700px] flex items-center justify-center">
+
           {/* Connector Lines (The "X") */}
           <div className="absolute inset-0 hidden md:block pointer-events-none">
              {/* Diagonal 1 (Top Left to Bottom Right) */}
@@ -66,7 +66,7 @@ const ProprietaryFramework: React.FC = () => {
           <ParticleFlowSystem isVisible={isVisible} hoveredNode={hoveredNode} />
 
           {/* Central Nucleus (The Hub) */}
-          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 h-64 flex flex-col items-center justify-center bg-iffort-dark border border-white/10 rounded-full shadow-[0_0_60px_rgba(0,0,0,0.5)] transition-all duration-1000 animate-[hubPulse_3s_ease-in-out_infinite] ${isVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}>
+          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 h-64 flex flex-col items-center justify-center bg-iffort-dark border border-white/10 rounded-full shadow-[0_0_60px_rgba(0,0,0,0.5)] transition-all duration-1000 animate-[hubPulse_3s_ease-in-out_infinite] pointer-events-none ${isVisible ? 'scale-100 opacity-100' : 'scale-75 opacity-0'}`}>
              <div className="absolute inset-2 border border-white/5 rounded-full animate-[hubInnerRing_3s_ease-in-out_infinite]"></div>
              <div className="text-center px-4">
                <span className="block text-xs font-bold text-iffort-blue tracking-[0.3em] uppercase mb-3">Predictable</span>
@@ -76,11 +76,11 @@ const ProprietaryFramework: React.FC = () => {
           </div>
 
           {/* The Grid of Nodes */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-12 md:gap-y-32 w-full h-full relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-48 gap-y-12 md:gap-y-32 w-full h-full relative z-10 px-12 md:px-20">
             
             {/* Node 1: Top Left */}
             <div
-              className={`flex flex-col md:items-end md:text-right transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+              className={`flex flex-col md:items-end md:text-right transition-all duration-1000 delay-300 -translate-x-8 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
               onMouseEnter={() => setHoveredNode('blue')}
               onMouseLeave={() => setHoveredNode(null)}
             >
@@ -98,7 +98,7 @@ const ProprietaryFramework: React.FC = () => {
 
             {/* Node 2: Top Right */}
             <div
-              className={`flex flex-col md:items-start md:text-left transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+              className={`flex flex-col md:items-start md:text-left transition-all duration-1000 delay-500 translate-x-8 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
               onMouseEnter={() => setHoveredNode('pink')}
               onMouseLeave={() => setHoveredNode(null)}
             >
@@ -116,7 +116,7 @@ const ProprietaryFramework: React.FC = () => {
 
              {/* Node 4: Bottom Left (Swapped Logic for Visual Balance, Logical Flow follows Clockwise) */}
              <div
-               className={`flex flex-col md:items-end md:text-right transition-all duration-1000 delay-900 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+               className={`flex flex-col md:items-end md:text-right transition-all duration-1000 delay-900 -translate-x-8 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                onMouseEnter={() => setHoveredNode('purple')}
                onMouseLeave={() => setHoveredNode(null)}
              >
@@ -134,7 +134,7 @@ const ProprietaryFramework: React.FC = () => {
 
             {/* Node 3: Bottom Right */}
             <div
-              className={`flex flex-col md:items-start md:text-left transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+              className={`flex flex-col md:items-start md:text-left transition-all duration-1000 delay-700 translate-x-8 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
               onMouseEnter={() => setHoveredNode('green')}
               onMouseLeave={() => setHoveredNode(null)}
             >

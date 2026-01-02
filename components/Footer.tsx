@@ -225,9 +225,9 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-gray-500 text-sm">
           <p>&copy; {new Date().getFullYear()} Iffort. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
+            <a href="https://www.iffort.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="https://www.iffort.com/terms-conditions/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="https://linkedin.com/company/iffort" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
           </div>
         </div>
       </div>
