@@ -10,14 +10,15 @@ interface CaseStudyDetailProps {
 const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
 
   const handleScrollDown = () => {
-    // Scroll the parent container to the main content section
-    const wrapper = document.querySelector('.min-h-screen');
-    const mainContent = document.querySelector('main');
+    // Find the main content section and scroll to it
+    const mainContent = document.querySelector('.case-study-detail main');
 
-    if (wrapper && mainContent) {
-      const headerHeight = document.querySelector('header')?.clientHeight || 0;
-      const scrollPosition = headerHeight - 80; // Subtract navbar height
-      wrapper.scrollTo({
+    if (mainContent) {
+      // Get the position of main content relative to viewport
+      const rect = mainContent.getBoundingClientRect();
+      const scrollPosition = window.scrollY + rect.top - 100; // Offset for navbar
+
+      window.scrollTo({
         top: scrollPosition,
         behavior: 'smooth'
       });
@@ -25,7 +26,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white overflow-y-auto">
+    <div className="case-study-detail min-h-screen bg-white">
       {/* Hero Section */}
       <header className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden mt-16">
         <img 
