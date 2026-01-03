@@ -52,7 +52,26 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
                   <p className="text-3xl font-bold text-slate-900">{study.client}</p>
                 </div>
                 
-                <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm">
+                <div className="relative bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm overflow-visible">
+                  {/* Orbiting Dots */}
+                  <div className="absolute inset-0 pointer-events-none" style={{ '--orbit-radius': '180px' } as React.CSSProperties}>
+                    {[0, 1, 2, 3, 4, 5].map((i) => (
+                      <div
+                        key={i}
+                        className="orbit-dot absolute top-1/2 left-1/2 -ml-[3px] -mt-[3px]"
+                        style={{
+                          width: '6px',
+                          height: '6px',
+                          borderRadius: '50%',
+                          backgroundColor: i % 2 === 0 ? '#00C9FF' : '#FF2E63',
+                          opacity: 0.4,
+                          animation: `orbitDot ${10 + i}s linear infinite, dotPulse 2s ease-in-out infinite`,
+                          animationDelay: `${i * -1.67}s, ${i * 0.3}s`,
+                        }}
+                      />
+                    ))}
+                  </div>
+
                   <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-200 pb-2">Impact at a Glance</h3>
                   <div className="space-y-8">
                     {study.stats.map((stat, idx) => (

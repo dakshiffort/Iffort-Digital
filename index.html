@@ -160,6 +160,40 @@
           transform: scale(1) !important;
         }
       }
+
+      /* Impact Stats Orbiting Dots Animation */
+      @keyframes orbitDot {
+        0% {
+          transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
+          opacity: 0.3;
+        }
+      }
+
+      @keyframes dotPulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 0 8px currentColor;
+        }
+        50% {
+          transform: scale(1.2);
+          box-shadow: 0 0 12px currentColor;
+        }
+      }
+
+      /* Accessibility: Respect reduced motion preference for orbit dots */
+      @media (prefers-reduced-motion: reduce) {
+        .orbit-dot {
+          animation: none !important;
+          display: none !important;
+        }
+      }
     </style>
   <script type="importmap">
 {
