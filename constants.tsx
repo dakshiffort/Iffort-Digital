@@ -54,7 +54,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: 'Asset', value: 'Unified Brand' }
     ],
     tags: ['Rebranding', 'Design System', 'Deep-Tech'],
-    image: '/assets/mozark-case-study.png',
+    image: '/assets/case-studies/deep-tech leader.png',
     content: {
       challenge: 'While Mozark possessed sophisticated product suites, their brand identity was rooted in startup origins. Visual fragmentation made it difficult for customers to perceive their products as an integrated ecosystem, hindering enterprise contracts with Tier-1 Telcos.',
       approach: 'We engineered a scalable 4-Pillar Strategic Framework rooted in their operational philosophy: Measure, Observe, Care, and Act. We implemented a product-led color recognition system and a modular visual architecture symbolizing interoperability.',
@@ -74,7 +74,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: 'Budget', value: '1.3 Cr Optimized' }
     ],
     tags: ['Lead Gen', 'Performance Marketing', 'HRTech'],
-    image: 'https://picsum.photos/seed/shrm/800/600',
+    image: '/assets/case-studies/global hrtech giant.png',
     content: {
       challenge: 'The hurdle wasn\'t just visibility - it was velocity and validity. SHRM needed to scale lead volume aggressively without diluting quality or losing control of CPL across diverse landscapes.',
       approach: 'We started with intent, surgically mapping Ideal Customer Profiles (ICPs). We deployed a multi-layered messaging framework and implemented "algorithmic governance" to scale budgets only when ICP alignment was proven.',
@@ -93,7 +93,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: 'MQLs', value: '1,059' }
     ],
     tags: ['Revenue Ops', 'PPC', 'Real Estate'],
-    image: 'https://picsum.photos/seed/cowrks/800/600',
+    image: '/assets/case-studies/premiumcoworking.png',
     content: {
       challenge: 'Despite premium facilities, marketing spend was fragmented with no "single source of truth" for attribution. It was difficult to identify which campaigns drove profit versus noise.',
       approach: 'We established "tracking integrity" by integrating Salesforce with Google Ads/GA4. We restructured the funnel (TOFU/MOFU/BOFU) and implemented Product-Wise Campaign Mapping to shift budgets to high-margin products like Flexi-Offices.',
@@ -105,14 +105,14 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: 'hp',
     client: 'Enterprise IT Leader',
     category: 'Content Strategy & Events',
-    title: 'Defining the Narrative for a Global IT Leader’s Flagship Event',
+    title: 'Defining the Narrative for a Global IT Leader's Flagship Event',
     description: 'Serving as the Content Fulfillment Center to develop the strategic DNA for a massive enterprise event.',
     stats: [
       { label: 'Deliverables', value: '360° Content' },
       { label: 'Stakeholders', value: 'Multi-Region' }
     ],
     tags: ['Content Strategy', 'Events', 'Enterprise IT'],
-    image: 'https://picsum.photos/seed/hp/800/600',
+    image: '/assets/case-studies/enterpriseit.png',
     content: {
       challenge: 'A global enterprise event involves hundreds of stakeholders. Without a unified "North Star," brand messaging becomes fragmented. The challenge was distilling complex IT solutions into a cohesive narrative for C-suite executives.',
       approach: 'We developed a "Strategic Event Framework" and an "Event Manifesto" (Creative Bible). This ensured total alignment across executive messaging, editorial content, multimedia, and social assets.',
@@ -130,7 +130,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: 'Coverage', value: 'India & MENA' }
     ],
     tags: ['ABM', 'Lead Gen', 'B2B Services'],
-    image: 'https://picsum.photos/seed/channelplay/800/600',
+    image: '/assets/case-studies/retaildistribution.png',
     content: {
       challenge: 'Complex B2B decision-making cycles for high-touch services and in-house tech products required a sophisticated approach to reach C-suite executives.',
       approach: 'We built a unified "Lead Generation Engine" using Google Search, LinkedIn Marketing, and Account-Based Marketing (ABM). We supported this with a content-first philosophy using whitepapers and webinars.',
@@ -142,14 +142,14 @@ export const CASE_STUDIES: CaseStudy[] = [
     client: 'Global Hygiene Brand',
     category: 'FMCG & Event Marketing',
     title: 'From Conversions to Acquisitions: Driving Growth for a Leading Hygiene Brand at DWTC',
-    description: 'Introducing RB’s cleaning solutions to decision-makers in Hospitality and F&B through a strategic, 45-day multi-touch campaign and exclusive event.',
+    description: 'Introducing RB's cleaning solutions to decision-makers in Hospitality and F&B through a strategic, 45-day multi-touch campaign and exclusive event.',
     stats: [
       { label: 'Qualified Leads', value: '55+' },
       { label: 'Attendees', value: '15+ CXOs' },
       { label: 'Campaign', value: '45 Days' }
     ],
     tags: ['ABM', 'Event Marketing', 'Lead Gen'],
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2070&auto=format&fit=crop',
+    image: '/assets/case-studies/globalhygiene.png',
     content: {
       challenge: 'RB needed to reach niche decision-makers (CXOs, Facility Managers) in the Hospitality and F&B sectors. The challenge was establishing clear value to encourage these busy leaders to attend an offline "Business Breakfast" at DWTC.',
       approach: 'We executed a 45-day multi-touch campaign including AI-powered data scraping, cold calling, and LinkedIn ABM. We managed the entire offline experience, including sales collaterals and logistics, to ensure a premium engagement.',
