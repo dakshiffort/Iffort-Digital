@@ -86,11 +86,15 @@ const Navbar: React.FC = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
+            <a
+              key={link.name}
+              href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-sm font-medium text-gray-300 hover:text-white hover:text-iffort-pink transition-colors uppercase tracking-widest cursor-pointer"
+              className={`text-sm font-medium transition-colors uppercase tracking-widest cursor-pointer ${
+                isCaseStudyPage
+                  ? 'text-white hover:text-iffort-pink'
+                  : 'text-gray-300 hover:text-white hover:text-iffort-pink'
+              }`}
             >
               {link.name}
             </a>
