@@ -161,35 +161,27 @@
         }
       }
 
-      /* Impact Stats Orbiting Dots Animation */
-      @keyframes orbitDot {
+      /* Impact Stats Floating Particles Animation */
+      @keyframes floatParticle {
         0% {
-          transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
-          opacity: 0.3;
+          transform: translateY(0) translateX(0);
+          opacity: 0;
         }
-        50% {
-          opacity: 0.6;
+        10% {
+          opacity: 0.5;
+        }
+        90% {
+          opacity: 0.5;
         }
         100% {
-          transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
-          opacity: 0.3;
+          transform: translateY(-100px) translateX(var(--float-offset, 0));
+          opacity: 0;
         }
       }
 
-      @keyframes dotPulse {
-        0%, 100% {
-          transform: scale(1);
-          box-shadow: 0 0 8px currentColor;
-        }
-        50% {
-          transform: scale(1.2);
-          box-shadow: 0 0 12px currentColor;
-        }
-      }
-
-      /* Accessibility: Respect reduced motion preference for orbit dots */
+      /* Accessibility: Respect reduced motion preference for particles */
       @media (prefers-reduced-motion: reduce) {
-        .orbit-dot {
+        .impact-particle {
           animation: none !important;
           display: none !important;
         }

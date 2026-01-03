@@ -52,28 +52,29 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
                   <p className="text-3xl font-bold text-slate-900">{study.client}</p>
                 </div>
                 
-                <div className="relative bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm overflow-visible">
-                  {/* Orbiting Dots */}
-                  <div className="absolute inset-0 pointer-events-none" style={{ '--orbit-radius': '180px' } as React.CSSProperties}>
-                    {[0, 1, 2, 3, 4, 5].map((i) => (
+                <div className="relative bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+                  {/* Floating Particles Background */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+                    {[0, 1, 2, 3, 4].map((i) => (
                       <div
                         key={i}
-                        className="orbit-dot absolute top-1/2 left-1/2 -ml-[3px] -mt-[3px]"
+                        className="impact-particle absolute"
                         style={{
-                          width: '6px',
-                          height: '6px',
+                          width: `${4 + i * 2}px`,
+                          height: `${4 + i * 2}px`,
                           borderRadius: '50%',
-                          backgroundColor: i % 2 === 0 ? '#00C9FF' : '#FF2E63',
-                          opacity: 0.4,
-                          animation: `orbitDot ${10 + i}s linear infinite, dotPulse 2s ease-in-out infinite`,
-                          animationDelay: `${i * -1.67}s, ${i * 0.3}s`,
+                          backgroundColor: i % 2 === 0 ? 'rgba(0, 201, 255, 0.3)' : 'rgba(255, 46, 99, 0.2)',
+                          left: `${20 + i * 15}%`,
+                          bottom: `-20px`,
+                          animation: `floatParticle ${4 + i}s ease-in infinite`,
+                          animationDelay: `${i * 0.5}s`,
                         }}
                       />
                     ))}
                   </div>
 
-                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-200 pb-2">Impact at a Glance</h3>
-                  <div className="space-y-8">
+                  <h3 className="relative z-10 text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 border-b border-slate-200 pb-2">Impact at a Glance</h3>
+                  <div className="relative z-10 space-y-8">
                     {study.stats.map((stat, idx) => (
                       <div key={idx} className="">
                         <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-iffort-blue to-purple-600 mb-1">{stat.value}</div>
