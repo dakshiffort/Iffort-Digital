@@ -141,7 +141,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: 'reckitt',
     client: 'Global Hygiene Brand',
     category: 'FMCG & Event Marketing',
-    title: 'From Conversions to Acquisitions: Driving Growth for a Leading Hygiene Brand at DWTC',
+    title: 'Driving Growth for a Leading Hygiene Brand at DWTC',
     description: 'Introducing RB\'s cleaning solutions to decision-makers in Hospitality and F&B through a strategic, 45-day multi-touch campaign and exclusive event.',
     stats: [
       { label: 'Qualified Leads', value: '55+' },
