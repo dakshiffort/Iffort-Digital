@@ -10,10 +10,17 @@ interface CaseStudyDetailProps {
 const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
 
   const handleScrollDown = () => {
-    // Scroll to the main content section (first challenge section)
+    // Scroll the parent container to the main content section
+    const wrapper = document.querySelector('.min-h-screen');
     const mainContent = document.querySelector('main');
-    if (mainContent) {
-      mainContent.scrollIntoView({ behavior: 'smooth' });
+
+    if (wrapper && mainContent) {
+      const headerHeight = document.querySelector('header')?.clientHeight || 0;
+      const scrollPosition = headerHeight - 80; // Subtract navbar height
+      wrapper.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
