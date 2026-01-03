@@ -149,7 +149,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { label: 'Campaign', value: '45 Days' }
     ],
     tags: ['ABM', 'Event Marketing', 'Lead Gen'],
-    image: '/assets/case-studies/globalhygiene.png',
+    image: '/assets/case-studies/globalhygienebrand.png',
     content: {
       challenge: 'RB needed to reach niche decision-makers (CXOs, Facility Managers) in the Hospitality and F&B sectors. The challenge was establishing clear value to encourage these busy leaders to attend an offline "Business Breakfast" at DWTC.',
       approach: 'We executed a 45-day multi-touch campaign including AI-powered data scraping, cold calling, and LinkedIn ABM. We managed the entire offline experience, including sales collaterals and logistics, to ensure a premium engagement.',
