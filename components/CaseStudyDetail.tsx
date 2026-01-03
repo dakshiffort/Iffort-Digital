@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronDown } from 'lucide-react';
 import { CaseStudy } from '../types';
 
 interface CaseStudyDetailProps {
@@ -8,6 +8,14 @@ interface CaseStudyDetailProps {
 }
 
 const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
+
+  const handleScrollDown = () => {
+    // Scroll to the main content section (first challenge section)
+    const mainContent = document.querySelector('main');
+    if (mainContent) {
+      mainContent.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white overflow-y-auto">
@@ -37,6 +45,15 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
               {study.title}
             </h1>
           </div>
+
+          {/* Scroll Down Indicator */}
+          <button
+            onClick={handleScrollDown}
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition-all duration-300 cursor-pointer z-30 bg-transparent border-none p-2 group"
+            aria-label="Scroll to case study content"
+          >
+            <ChevronDown size={28} className="group-hover:translate-y-1 transition-transform duration-300" />
+          </button>
         </div>
       </header>
 
