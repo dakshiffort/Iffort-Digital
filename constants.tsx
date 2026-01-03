@@ -105,7 +105,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     id: 'hp',
     client: 'Enterprise IT Leader',
     category: 'Content Strategy & Events',
-    title: 'Defining the Narrative for a Global IT Leader's Flagship Event',
+    title: 'Defining the Narrative for a Global IT Leader\'s Flagship Event',
     description: 'Serving as the Content Fulfillment Center to develop the strategic DNA for a massive enterprise event.',
     stats: [
       { label: 'Deliverables', value: '360° Content' },
@@ -116,7 +116,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     content: {
       challenge: 'A global enterprise event involves hundreds of stakeholders. Without a unified "North Star," brand messaging becomes fragmented. The challenge was distilling complex IT solutions into a cohesive narrative for C-suite executives.',
       approach: 'We developed a "Strategic Event Framework" and an "Event Manifesto" (Creative Bible). This ensured total alignment across executive messaging, editorial content, multimedia, and social assets.',
-      result: 'A flagship event where every keynote and visual asset felt like part of a single, powerful story. We enabled a global organization to speak with one voice on its most important stage.',
+      result: 'A flagship event where every keynote and visual asset felt like part of a single, powerful story. We enabled a global organization to speak with one voice on its most important stage.'
     }
   },
   {
@@ -134,7 +134,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     content: {
       challenge: 'Complex B2B decision-making cycles for high-touch services and in-house tech products required a sophisticated approach to reach C-suite executives.',
       approach: 'We built a unified "Lead Generation Engine" using Google Search, LinkedIn Marketing, and Account-Based Marketing (ABM). We supported this with a content-first philosophy using whitepapers and webinars.',
-      result: 'Shifted from a "cold-outreach" model to an "inbound-authority" model. Established a daily stream of inbound inquiries and a predictable SQL pipeline for high-value contracts.',
+      result: 'Shifted from a "cold-outreach" model to an "inbound-authority" model. Established a daily stream of inbound inquiries and a predictable SQL pipeline for high-value contracts.'
     }
   },
   {
@@ -142,7 +142,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     client: 'Global Hygiene Brand',
     category: 'FMCG & Event Marketing',
     title: 'From Conversions to Acquisitions: Driving Growth for a Leading Hygiene Brand at DWTC',
-    description: 'Introducing RB's cleaning solutions to decision-makers in Hospitality and F&B through a strategic, 45-day multi-touch campaign and exclusive event.',
+    description: 'Introducing RB\'s cleaning solutions to decision-makers in Hospitality and F&B through a strategic, 45-day multi-touch campaign and exclusive event.',
     stats: [
       { label: 'Qualified Leads', value: '55+' },
       { label: 'Attendees', value: '15+ CXOs' },
@@ -153,7 +153,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     content: {
       challenge: 'RB needed to reach niche decision-makers (CXOs, Facility Managers) in the Hospitality and F&B sectors. The challenge was establishing clear value to encourage these busy leaders to attend an offline "Business Breakfast" at DWTC.',
       approach: 'We executed a 45-day multi-touch campaign including AI-powered data scraping, cold calling, and LinkedIn ABM. We managed the entire offline experience, including sales collaterals and logistics, to ensure a premium engagement.',
-      result: 'Generated 55+ qualified leads (27% Hospitality, 23% F&B, 23% Cleaning). We successfully convened 15+ client-side decision-makers at the event, creating a direct pipeline for RB’s professional solutions.',
+      result: 'Generated 55+ qualified leads (27% Hospitality, 23% F&B, 23% Cleaning). We successfully convened 15+ client-side decision-makers at the event, creating a direct pipeline for RB\'s professional solutions.',
       quote: "We didn't just generate leads; we engineered a high-value networking marketplace."
     }
   }
