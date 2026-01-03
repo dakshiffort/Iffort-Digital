@@ -28,7 +28,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ study }) => {
   return (
     <div className="case-study-detail min-h-screen bg-white">
       {/* Hero Section */}
-      <header className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden mt-16">
+      <header className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden">
         <img 
           src={study.image} 
           alt={study.client} 
