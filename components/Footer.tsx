@@ -12,16 +12,44 @@ const Footer: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    setError(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+
+      // Success
       setIsSubmitting(false);
       setSubmitted(true);
-      setFormState({ name: '', email: '', phone: '', service: SERVICES[0].title, message: '' });
-    }, 1500);
+      setFormState({
+        name: '',
+        email: '',
+        phone: '',
+        service: SERVICES[0].title,
+        message: ''
+      });
+
+    } catch (err) {
+      setIsSubmitting(false);
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
+      console.error('Form submission error:', err);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -54,6 +82,18 @@ const Footer: React.FC = () => {
                 </div>
             ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                    {error && (
+                        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                            <p className="text-red-400 text-sm font-medium">{error}</p>
+                            <button
+                                type="button"
+                                onClick={() => setError(null)}
+                                className="text-red-300 hover:text-red-200 text-xs mt-2 underline"
+                            >
+                                Dismiss
+                            </button>
+                        </div>
+                    )}
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                             <label htmlFor="name" className="text-sm font-medium text-gray-300">Name</label>
