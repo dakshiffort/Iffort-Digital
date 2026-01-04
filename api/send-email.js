@@ -218,11 +218,17 @@ export default async function handler(req, res) {
         error: emailResponse.error,
         errorType: typeof emailResponse.error,
         timestamp: new Date().toISOString(),
-        submitterEmail: formData.email
+        submitterEmail: formData.email,
+        hasApiKey: !!process.env.RESEND_API_KEY,
+        apiKeyPrefix: process.env.RESEND_API_KEY?.substring(0, 10) || 'NOT_SET'
       });
       return res.status(500).json({
         error: 'Email delivery failed',
-        message: 'Unable to send email. Please try again later.'
+        message: 'Unable to send email. Please try again later.',
+        debug: {
+          hasApiKey: !!process.env.RESEND_API_KEY,
+          errorMessage: emailResponse.error?.message || JSON.stringify(emailResponse.error)
+        }
       });
     }
 
