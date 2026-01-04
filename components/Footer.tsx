@@ -28,7 +28,16 @@ const Footer: React.FC = () => {
         body: JSON.stringify(formState),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        // If response isn't JSON, create a generic error object
+        data = {
+          message: `Server error: ${response.status} ${response.statusText}`,
+          error: 'Parse error'
+        };
+      }
 
       if (!response.ok) {
         throw new Error(data.message || 'Failed to send message');
