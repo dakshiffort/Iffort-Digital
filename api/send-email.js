@@ -1,20 +1,10 @@
 import { Resend } from 'resend';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Initialize Resend with API key from environment
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Type definitions for request body
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone?: string;
-  service: string;
-  message: string;
-}
-
 // Validation helper
-function validateFormData(data: any): data is ContactFormData {
+function validateFormData(data) {
   return (
     typeof data.name === 'string' && data.name.trim().length > 0 &&
     typeof data.email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) &&
@@ -25,7 +15,7 @@ function validateFormData(data: any): data is ContactFormData {
 }
 
 // Sanitize input to prevent XSS
-function sanitize(input: string): string {
+function sanitize(input) {
   return input
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -36,7 +26,7 @@ function sanitize(input: string): string {
 }
 
 // Generate email HTML template
-function generateEmailHTML(data: ContactFormData): string {
+function generateEmailHTML(data) {
   return `
 <!DOCTYPE html>
 <html>
@@ -121,7 +111,7 @@ function generateEmailHTML(data: ContactFormData): string {
 }
 
 // Generate plain text version
-function generateEmailText(data: ContactFormData): string {
+function generateEmailText(data) {
   return `
 NEW CONTACT FORM SUBMISSION
 From Iffort Digital Website
@@ -145,10 +135,7 @@ Submitted on ${new Date().toLocaleString('en-US', {
   `.trim();
 }
 
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse
-) {
+export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -177,7 +164,7 @@ export default async function handler(
       });
     }
 
-    const formData: ContactFormData = req.body;
+    const formData = req.body;
 
     // Send email using Resend
     const emailResponse = await resend.emails.send({
