@@ -7,7 +7,12 @@
     "dev": "vite",
     "dev:with-api": "node dev-server.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:email": "node test-email-api.mjs",
+    "test:email:curl": "bash test-email-curl.sh",
+    "test:resend": "node test-resend-direct.mjs",
+    "debug:inspect": "node inspect-request.mjs",
+    "debug:preview": "node preview-email.mjs"
   },
   "dependencies": {
     "@vercel/node": "^5.5.16",

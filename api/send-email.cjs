@@ -2,20 +2,14 @@ const { Resend } = require('resend');
 
 // Resend Email API Handler
 // Sends contact form submissions to daksh.sharma@iffort.com
-// Supports both RESEND_API_KEY and VITE_RESEND_API_KEY
+// Initialize Resend with API key from environment
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Lazy initialization of Resend - only create instance when needed
-let resendInstance = null;
-
-function getResend() {
-  if (!resendInstance) {
-    const apiKey = process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
-    if (!apiKey) {
-      throw new Error('RESEND_API_KEY or VITE_RESEND_API_KEY must be set in environment variables');
-    }
-    resendInstance = new Resend(apiKey);
-  }
-  return resendInstance;
+// Log API key status on startup (safely)
+if (process.env.RESEND_API_KEY) {
+  console.log('[Resend API] Initialized with API key:', process.env.RESEND_API_KEY.substring(0, 10) + '...');
+} else {
+  console.error('[Resend API] WARNING: RESEND_API_KEY environment variable is not set!');
 }
 
 // Validation helper
@@ -181,8 +175,30 @@ module.exports = async function handler(req, res) {
 
     const formData = req.body;
 
-    // Get Resend instance (will initialize if needed)
-    const resend = getResend();
+    // Log incoming request details (sanitized)
+    console.log('[Email API] Processing contact form submission:', {
+      timestamp: new Date().toISOString(),
+      submitterEmail: formData.email,
+      service: formData.service,
+      hasPhone: !!formData.phone,
+      messageLength: formData.message.length,
+      nameLength: formData.name.length
+    });
+
+    // Generate email content
+    const htmlContent = generateEmailHTML(formData);
+    const textContent = generateEmailText(formData);
+
+    // Log the payload being sent to Resend API
+    console.log('[Email API] Resend API call payload:', {
+      from: 'Iffort Digital <onboarding@resend.dev>',
+      to: ['daksh.sharma@iffort.com'],
+      replyTo: formData.email,
+      subject: `New Contact Form: ${formData.service} - ${formData.name}`,
+      htmlSize: htmlContent.length,
+      textSize: textContent.length,
+      htmlPreview: htmlContent.substring(0, 100) + '...'
+    });
 
     // Send email using Resend
     const emailResponse = await resend.emails.send({
@@ -190,20 +206,30 @@ module.exports = async function handler(req, res) {
       to: ['daksh.sharma@iffort.com'],
       replyTo: formData.email,
       subject: `New Contact Form: ${formData.service} - ${formData.name}`,
-      html: generateEmailHTML(formData),
-      text: generateEmailText(formData),
+      html: htmlContent,
+      text: textContent,
     });
 
     // Check if email was sent successfully
     if (emailResponse.error) {
-      console.error('Resend API Error:', emailResponse.error);
+      console.error('[Email API] Resend API Error:', {
+        error: emailResponse.error,
+        errorType: typeof emailResponse.error,
+        timestamp: new Date().toISOString(),
+        submitterEmail: formData.email
+      });
       return res.status(500).json({
         error: 'Email delivery failed',
         message: 'Unable to send email. Please try again later.'
       });
     }
 
-    console.log('Email sent successfully:', emailResponse.data?.id);
+    console.log('[Email API] Email sent successfully:', {
+      emailId: emailResponse.data?.id,
+      timestamp: new Date().toISOString(),
+      submitterEmail: formData.email,
+      service: formData.service
+    });
 
     // Return success response
     return res.status(200).json({
@@ -213,7 +239,12 @@ module.exports = async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('Unexpected error:', error);
+    console.error('[Email API] Unexpected error during email processing:', {
+      errorName: error.name,
+      errorMessage: error.message,
+      errorStack: error.stack,
+      timestamp: new Date().toISOString()
+    });
 
     return res.status(500).json({
       error: 'Internal server error',

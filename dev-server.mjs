@@ -38,6 +38,21 @@ setTimeout(() => {
           // Prepare request body
           req.body = body ? JSON.parse(body) : {};
 
+          // Log incoming API request details
+          console.log('[Dev Server] Received API request:', {
+            timestamp: new Date().toISOString(),
+            method: req.method,
+            url: req.url,
+            bodyKeys: Object.keys(req.body),
+            bodyPreview: req.body ? {
+              name: req.body.name?.substring(0, 20) + (req.body.name?.length > 20 ? '...' : ''),
+              email: req.body.email,
+              service: req.body.service,
+              hasPhone: !!req.body.phone,
+              messageLength: req.body.message?.length
+            } : 'empty'
+          });
+
           // Add helper methods to response
           const originalSetHeader = res.setHeader.bind(res);
           res.status = function(code) {
@@ -67,26 +82,47 @@ setTimeout(() => {
       return;
     }
 
-    // Proxy other requests to Vite on port 5173
-    const options = {
-      hostname: 'localhost',
-      port: 5173,
-      path: req.url,
-      method: req.method,
-      headers: req.headers
+    // Proxy other requests to Vite (try common ports: 5173, 3000, 3001)
+    // Vite tries 5173 first, then auto-increments if ports are in use
+    const tryProxyToVite = (portList) => {
+      if (portList.length === 0) {
+        res.statusCode = 503;
+        res.end('Vite development server is not available. Please ensure it is running.');
+        return;
+      }
+
+      const currentPort = portList[0];
+      const remainingPorts = portList.slice(1);
+
+      const options = {
+        hostname: 'localhost',
+        port: currentPort,
+        path: req.url,
+        method: req.method,
+        headers: req.headers
+      };
+
+      const proxyReq = http.request(options, (proxyRes) => {
+        console.log('[Dev Server] Successfully proxied to Vite on port', currentPort);
+        res.writeHead(proxyRes.statusCode, proxyRes.headers);
+        proxyRes.pipe(res);
+      });
+
+      proxyReq.on('error', (error) => {
+        console.log('[Dev Server] Vite not responding on port', currentPort, '- trying next port...');
+        if (remainingPorts.length > 0) {
+          tryProxyToVite(remainingPorts);
+        } else {
+          res.statusCode = 503;
+          res.end('Vite development server is not available.');
+        }
+      });
+
+      req.pipe(proxyReq);
     };
 
-    const proxyReq = http.request(options, (proxyRes) => {
-      res.writeHead(proxyRes.statusCode, proxyRes.headers);
-      proxyRes.pipe(res);
-    });
-
-    req.pipe(proxyReq);
-
-    proxyReq.on('error', () => {
-      res.statusCode = 503;
-      res.end('Service unavailable');
-    });
+    // Try ports in order: 5173 (default), 3000 (common fallback), 3001
+    tryProxyToVite([5173, 3000, 3001]);
   });
 
   proxyServer.listen(3002, () => {
@@ -97,8 +133,12 @@ setTimeout(() => {
 
   proxyServer.on('error', (error) => {
     if (error.code === 'EADDRINUSE') {
-      console.error('Port 3002 is already in use. Please close the existing process or use a different port.');
-      process.exit(1);
+      console.error('Port 3002 is already in use. Trying port 3003...');
+      proxyServer.listen(3003, () => {
+        console.log('\n✓ Local dev server with API support running at http://localhost:3003');
+        console.log('✓ Frontend: http://localhost:3003 (proxied from Vite)');
+        console.log('✓ API endpoint: http://localhost:3003/api/send-email\n');
+      });
     }
   });
 }, 5000);
