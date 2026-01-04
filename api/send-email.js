@@ -1,4 +1,4 @@
-import { Resend } from 'resend';
+const { Resend } = require('resend');
 
 // Resend Email API Handler
 // Sends contact form submissions to daksh.sharma@iffort.com
@@ -137,7 +137,7 @@ Submitted on ${new Date().toLocaleString('en-US', {
   `.trim();
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
