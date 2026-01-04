@@ -5,8 +5,8 @@
   "installCommand": "npm install",
   "framework": null,
   "functions": {
-    "api/**/*.cjs": {
-      "runtime": "node20.x",
+    "api/**/*.js": {
+      "runtime": "nodejs20.x",
       "maxDuration": 10
     }
   },
