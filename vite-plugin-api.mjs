@@ -1,10 +1,8 @@
-import { createRequire } from 'module';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const require = createRequire(import.meta.url);
 
 // Load environment variables from .env.local and .env
 dotenv.config({ path: path.join(__dirname, '.env.local') });
@@ -43,9 +41,10 @@ export default function apiPlugin() {
               process.env.RESEND_API_KEY = process.env.VITE_RESEND_API_KEY;
             }
             
-            // Require the CommonJS handler (cache cleared to reload with fresh env vars)
-            delete require.cache[path.join(__dirname, 'api/send-email.cjs')];
-            const handler = require('./api/send-email.cjs');
+            // Import the ES module handler (with cache busting)
+            const modulePath = `file://${path.join(__dirname, 'api/send-email.js')}?t=${Date.now()}`;
+            const module = await import(modulePath);
+            const handler = module.default;
 
             // Prepare request body
             req.body = body ? JSON.parse(body) : {};

@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 
 // Resend Email API Handler
-// Sends contact form submissions to daksh.sharma@iffort.com
+// Sends contact form submissions to kshipra.uniyal@iffort.com and lav.singh@iffort.com
 // Initialize Resend with API key from environment
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -203,7 +203,7 @@ export default async function handler(req, res) {
     // Send email using Resend
     const emailResponse = await resend.emails.send({
       from: 'Iffort Digital <onboarding@resend.dev>',
-      to: ['daksh.sharma@iffort.com'],
+      to: ['kshipra.uniyal@iffort.com', 'lav.singh@iffort.com'],
       replyTo: formData.email,
       subject: `New Contact Form: ${formData.service} - ${formData.name}`,
       html: htmlContent,
