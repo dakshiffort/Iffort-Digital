@@ -2,8 +2,21 @@ const { Resend } = require('resend');
 
 // Resend Email API Handler
 // Sends contact form submissions to daksh.sharma@iffort.com
-// Initialize Resend with API key from environment
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Supports both RESEND_API_KEY and VITE_RESEND_API_KEY
+
+// Lazy initialization of Resend - only create instance when needed
+let resendInstance = null;
+
+function getResend() {
+  if (!resendInstance) {
+    const apiKey = process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY or VITE_RESEND_API_KEY must be set in environment variables');
+    }
+    resendInstance = new Resend(apiKey);
+  }
+  return resendInstance;
+}
 
 // Validation helper
 function validateFormData(data) {
@@ -167,6 +180,9 @@ module.exports = async function handler(req, res) {
     }
 
     const formData = req.body;
+
+    // Get Resend instance (will initialize if needed)
+    const resend = getResend();
 
     // Send email using Resend
     const emailResponse = await resend.emails.send({
