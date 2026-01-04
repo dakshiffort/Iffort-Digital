@@ -1,5 +1,7 @@
 import { Resend } from 'resend';
 
+// Resend Email API Handler
+// Sends contact form submissions to daksh.sharma@iffort.com
 // Initialize Resend with API key from environment
 const resend = new Resend(process.env.RESEND_API_KEY);
 
