@@ -201,9 +201,11 @@ export default async function handler(req, res) {
     });
 
     // Send email using Resend
+    // Note: kshipra.uniyal@iffort.com and lav.singh@iffort.com need to be verified in Resend dashboard
+    // Currently using daksh.sharma@iffort.com as fallback until new addresses are verified
     const emailResponse = await resend.emails.send({
       from: 'Iffort Digital <onboarding@resend.dev>',
-      to: ['kshipra.uniyal@iffort.com', 'lav.singh@iffort.com'],
+      to: ['daksh.sharma@iffort.com', 'kshipra.uniyal@iffort.com', 'lav.singh@iffort.com'],
       replyTo: formData.email,
       subject: `New Contact Form: ${formData.service} - ${formData.name}`,
       html: htmlContent,
