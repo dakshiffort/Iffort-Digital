@@ -5,7 +5,7 @@
   "installCommand": "npm install",
   "framework": null,
   "functions": {
-    "api/**/*.js": {
+    "api/**/*.cjs": {
       "runtime": "vercel-node@latest",
       "maxDuration": 10
     }
