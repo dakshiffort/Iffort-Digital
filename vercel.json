@@ -3,6 +3,7 @@
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
+  "nodeVersion": "18.x",
   "framework": null,
   "functions": {
     "api/**/*.js": {
