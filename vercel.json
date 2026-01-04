@@ -6,7 +6,7 @@
   "framework": null,
   "functions": {
     "api/**/*.cjs": {
-      "runtime": "vercel-node@latest",
+      "runtime": "node20.x",
       "maxDuration": 10
     }
   },
