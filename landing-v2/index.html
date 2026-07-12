@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Iffort | Stop Marketing. Start Engineering Demand.</title>
-  <meta name="description" content="Iffort builds revenue engines, not campaigns. 45,000+ qualified leads. 5X ROAS. Book a meeting and see the blueprint." />
+  <meta name="description" content="Iffort builds revenue engines for B2B companies — 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. We don't work with everyone. See if you qualify and book a meeting." />
 
   <!-- Open Graph for ad campaign link previews -->
   <meta property="og:title" content="Stop Marketing. Start Engineering Demand. | Iffort" />
-  <meta property="og:description" content="The old playbook is dead. We build AI-powered growth engines with proof: 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. Book a meeting." />
+  <meta property="og:description" content="We take on a limited number of B2B partners each quarter. 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. See if you qualify — book a meeting." />
   <meta property="og:type" content="website" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -90,9 +90,17 @@
     }
     .live-dot { animation: pulseDot 1.6s ease-in-out infinite; }
 
+    /* FAQ accordion */
+    details.faq summary { list-style: none; cursor: pointer; }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq .faq-icon { transition: transform 0.25s ease; }
+    details.faq[open] .faq-icon { transform: rotate(45deg); }
+    details.faq[open] summary { color: #ffffff; }
+
     @media (prefers-reduced-motion: reduce) {
       .marquee-track, .live-dot { animation: none !important; }
       .reveal { opacity: 1 !important; animation: none !important; }
+      details.faq .faq-icon { transition: none !important; }
     }
   </style>
 </head>
@@ -105,11 +113,12 @@
       <a href="#top" class="text-2xl font-extrabold tracking-tight">
         iffort<span class="text-iffort-pink">.</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm text-gray-300">
+      <nav class="hidden md:flex items-center gap-7 text-sm text-gray-300">
         <a href="#manifesto" class="hover:text-white transition-colors">The Shift</a>
-        <a href="#proof" class="hover:text-white transition-colors">Proof</a>
-        <a href="#services" class="hover:text-white transition-colors">What We Do</a>
-        <a href="#terms" class="hover:text-white transition-colors">T&amp;C</a>
+        <a href="#work" class="hover:text-white transition-colors">Case Studies</a>
+        <a href="#process" class="hover:text-white transition-colors">Process</a>
+        <a href="#fit" class="hover:text-white transition-colors">Are You a Fit?</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
       </nav>
       <a href="#book" data-booking-cta
          class="glow-cta bg-iffort-pink hover:bg-pink-600 text-white text-sm font-bold px-5 py-2.5 rounded-full">
@@ -126,7 +135,7 @@
     <div class="relative max-w-5xl mx-auto px-6 text-center">
       <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-xs uppercase tracking-widest text-gray-300 mb-8">
         <span class="live-dot w-2 h-2 rounded-full bg-iffort-blue inline-block"></span>
-        Now booking growth audits for Q3
+        Accepting a limited number of new partners this quarter
       </div>
 
       <h1 class="text-5xl md:text-7xl font-black leading-[1.05] mb-8">
@@ -137,7 +146,7 @@
       <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-6 leading-relaxed">
         Your competitors are still buying impressions and praying. We build
         <span class="text-white font-semibold">AI-powered revenue engines</span> with attribution you
-        can defend in a board meeting.
+        can defend in a board meeting. And no — <span class="text-white font-semibold">we don't work with everyone.</span>
       </p>
 
       <p class="text-sm uppercase tracking-widest text-gray-500 mb-10">
@@ -149,14 +158,14 @@
            class="glow-cta bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full">
           Book a Meeting &rarr;
         </a>
-        <a href="#proof"
+        <a href="#fit"
            class="border border-white/15 hover:border-iffort-blue/60 hover:text-iffort-blue text-gray-300 font-semibold text-lg px-10 py-4 rounded-full transition-colors">
-          See the Proof
+          See If You Qualify
         </a>
       </div>
 
       <p class="mt-6 text-xs text-gray-500">
-        30 minutes. No pitch deck. You leave with a growth teardown of your funnel — free.
+        30 minutes. No pitch deck. You leave with a growth teardown of your funnel — free, whether or not we work together.
       </p>
     </div>
   </section>
@@ -220,12 +229,13 @@
     </div>
   </section>
 
-  <!-- ============ PROOF / STATS ============ -->
-  <section id="proof" class="py-28 bg-iffort-navy/40 border-y border-white/5">
+  <!-- ============ PROOF / STATS + CASE STUDIES ============ -->
+  <section id="work" class="py-28 bg-iffort-navy/40 border-y border-white/5">
     <div class="max-w-6xl mx-auto px-6">
       <div class="reveal text-center mb-16">
         <p class="text-iffort-pink text-sm font-bold uppercase tracking-widest mb-4">Receipts, not promises</p>
-        <h2 class="text-4xl md:text-5xl font-black">Numbers our clients take to the board</h2>
+        <h2 class="text-4xl md:text-5xl font-black mb-4">Case studies our clients take to the board</h2>
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto">Six engagements. Six different industries. One pattern: measurable pipeline and revenue, not activity reports.</p>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
@@ -247,73 +257,351 @@
         </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8">
-          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">HRTech &middot; India + MENA</p>
-          <h3 class="text-xl font-bold mb-3">Scaling a global HR giant without diluting lead quality</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Surgical ICP mapping and algorithmic budget governance turned aggressive scale targets into
-            45,000+ qualified leads at lean CPL — and 40% year-over-year growth.
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- SHRM -->
+        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-blue/40 transition-colors">
+          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">HRTech &middot; Lead Gen &middot; India + MENA</p>
+          <h3 class="text-2xl font-bold mb-4">Scaling a global HR giant without diluting lead quality</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            <span class="text-white font-semibold">The problem:</span> SHRM needed aggressive lead
+            volume without losing control of cost-per-lead across two wildly different markets.
           </p>
-        </article>
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8">
-          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">Real Estate &middot; Revenue Ops</p>
-          <h3 class="text-xl font-bold mb-3">From fragmented spend to a 5X revenue engine</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            We wired Salesforce to Google Ads and GA4, rebuilt the funnel, and shifted budget to
-            high-margin products. Result: ₹8.25 Cr+ in attributed revenue for a premium coworking leader.
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            <span class="text-white font-semibold">What we did:</span> surgical ICP mapping, a
+            multi-layered messaging framework, and algorithmic budget governance — spend scaled only
+            when ICP alignment was proven.
           </p>
+          <div class="mt-auto flex flex-wrap gap-3">
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">45,000+</span> qualified leads</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">40%</span> YoY growth</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">₹1.3 Cr</span> budget optimized</span>
+          </div>
         </article>
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8">
-          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">Deep-Tech &middot; Rebrand</p>
-          <h3 class="text-xl font-bold mb-3">Rebranding a deep-tech player for enterprise dominance</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            A scalable 4-pillar brand framework moved Mozark from niche utility to enterprise-grade
-            global intelligence platform — accelerating sales velocity with Tier-1 telcos.
+
+        <!-- Cowrks -->
+        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-pink/40 transition-colors">
+          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">Real Estate &middot; Revenue Ops &middot; India</p>
+          <h3 class="text-2xl font-bold mb-4">From fragmented ad spend to a 5X revenue engine</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            <span class="text-white font-semibold">The problem:</span> a premium coworking leader with
+            no single source of truth — nobody could say which campaigns drove profit and which drove noise.
           </p>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            <span class="text-white font-semibold">What we did:</span> wired Salesforce to Google Ads and
+            GA4 for tracking integrity, rebuilt the funnel end to end, and shifted budget to high-margin products.
+          </p>
+          <div class="mt-auto flex flex-wrap gap-3">
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">₹8.25 Cr+</span> attributed revenue</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">5X</span> ROAS</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">1,059</span> MQLs</span>
+          </div>
         </article>
+
+        <!-- Mozark -->
+        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-amber/40 transition-colors">
+          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">Deep-Tech &middot; Rebranding &middot; Global</p>
+          <h3 class="text-2xl font-bold mb-4">Rebranding a deep-tech player for enterprise dominance</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            <span class="text-white font-semibold">The problem:</span> Mozark's brand still looked like
+            its startup origins — visual fragmentation was costing them enterprise contracts with Tier-1 telcos.
+          </p>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            <span class="text-white font-semibold">What we did:</span> engineered a scalable 4-pillar brand
+            framework (Measure, Observe, Care, Act) with a modular visual architecture built for interoperability.
+          </p>
+          <div class="mt-auto flex flex-wrap gap-3">
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">Enterprise-grade</span> repositioning</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm">Faster <span class="text-iffort-amber font-bold">sales velocity</span></span>
+          </div>
+        </article>
+
+        <!-- HP -->
+        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-blue/40 transition-colors">
+          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">Enterprise IT &middot; Content Strategy &middot; Events</p>
+          <h3 class="text-2xl font-bold mb-4">One voice for a global IT leader's flagship event</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            <span class="text-white font-semibold">The problem:</span> hundreds of stakeholders, no
+            unified North Star — complex IT solutions fragmenting into inconsistent C-suite messaging.
+          </p>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            <span class="text-white font-semibold">What we did:</span> served as the Content Fulfillment
+            Center — a Strategic Event Framework and creative bible aligning keynotes, editorial, multimedia, and social.
+          </p>
+          <div class="mt-auto flex flex-wrap gap-3">
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">360°</span> content delivery</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">Multi-region</span> stakeholder alignment</span>
+          </div>
+        </article>
+
+        <!-- Channelplay -->
+        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-pink/40 transition-colors">
+          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">B2B Services &middot; ABM &middot; India + MENA</p>
+          <h3 class="text-2xl font-bold mb-4">From cold outreach to an inbound-authority lead engine</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            <span class="text-white font-semibold">The problem:</span> long, complex B2B cycles for
+            high-touch retail services — and a pipeline dependent on cold outreach to C-suite buyers.
+          </p>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            <span class="text-white font-semibold">What we did:</span> built a unified lead engine across
+            Google Search, LinkedIn, and ABM, backed by whitepapers and webinars that did the selling first.
+          </p>
+          <div class="mt-auto flex flex-wrap gap-3">
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">Daily</span> inbound inquiries</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">Predictable</span> SQL pipeline</span>
+          </div>
+        </article>
+
+        <!-- Reckitt -->
+        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-amber/40 transition-colors">
+          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">FMCG &middot; ABM + Events &middot; UAE</p>
+          <h3 class="text-2xl font-bold mb-4">Filling a room with CXOs for a global hygiene brand</h3>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">
+            <span class="text-white font-semibold">The problem:</span> Reckitt needed niche decision-makers
+            from Hospitality and F&amp;B to physically show up to a business breakfast at DWTC.
+          </p>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            <span class="text-white font-semibold">What we did:</span> a 45-day multi-touch campaign —
+            AI-powered data enrichment, LinkedIn ABM, cold calling — plus the full premium offline experience.
+          </p>
+          <div class="mt-auto flex flex-wrap gap-3">
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">55+</span> qualified leads</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">15+</span> CXOs in the room</span>
+            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">45-day</span> campaign</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="reveal text-center mt-14">
+        <a href="#book" data-booking-cta
+           class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full">
+          Want numbers like these? Book a Meeting &rarr;
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ============ SERVICES ============ -->
-  <section id="services" class="py-28">
+  <!-- ============ PROCESS ============ -->
+  <section id="process" class="py-28">
     <div class="max-w-6xl mx-auto px-6">
       <div class="reveal max-w-3xl mb-16">
-        <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">What We Do</p>
-        <h2 class="text-4xl md:text-5xl font-black mb-6">Four disciplines. One growth engine.</h2>
-        <p class="text-xl text-gray-400">No random acts of marketing. Every discipline feeds the same pipeline.</p>
+        <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">How an engagement works</p>
+        <h2 class="text-4xl md:text-5xl font-black mb-6">No guesswork. A sequence.</h2>
+        <p class="text-xl text-gray-400">We don't start with a retainer. We start by finding exactly where your revenue engine is broken — then we fix it in phases, each one earning the next.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-2">Phase 1 &middot; Weeks 1–3</p>
+          <h3 class="text-2xl font-bold mb-3">The Teardown</h3>
+          <p class="text-gray-400 leading-relaxed mb-4">
+            A fixed-scope audit of your funnel, attribution, ICPs, and channel economics. We map the gap
+            between where you are and your revenue goal — and tell you honestly if we can close it.
+          </p>
+          <p class="text-sm text-gray-500">You get: a written teardown, a payback model, and a go/no-go recommendation. Even if the answer is no.</p>
+        </div>
+        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-2">Phase 2 &middot; Weeks 4–12</p>
+          <h3 class="text-2xl font-bold mb-3">Proof Sprints</h3>
+          <p class="text-gray-400 leading-relaxed mb-4">
+            Hypothesis-driven experiments across the channels the teardown flagged — paid, ABM, AI-first
+            SEO/GEO, content, events. Weekly reviews on CPL, lead quality, and pipeline contribution.
+          </p>
+          <p class="text-sm text-gray-500">You get: proven channels with unit economics, killed losers, and a CRM-verified pipeline forming.</p>
+        </div>
+        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-2">Phase 3 &middot; Quarter 2 onward</p>
+          <h3 class="text-2xl font-bold mb-3">Scale &amp; Systemize</h3>
+          <p class="text-gray-400 leading-relaxed mb-4">
+            Budgets scale only behind proven ICP alignment — the same algorithmic governance that took
+            SHRM to 45,000+ qualified leads and Cowrks to 5X ROAS. Dashboards report revenue, not activity.
+          </p>
+          <p class="text-sm text-gray-500">You get: a compounding revenue engine, documented playbooks, and numbers your CFO signs off on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FIT / QUALIFICATION ============ -->
+  <section id="fit" class="py-28 bg-iffort-navy/40 border-y border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal max-w-3xl mb-16">
+        <p class="text-iffort-pink text-sm font-bold uppercase tracking-widest mb-4">We choose our partners carefully</p>
+        <h2 class="text-4xl md:text-5xl font-black mb-6">We don't work with everyone.<br />Here's how to know if that's you.</h2>
+        <p class="text-xl text-gray-400">
+          Every result on this page came from a partnership where both sides were all-in. We take on a
+          limited number of new partners each quarter so that never changes — which means we say no more
+          often than we say yes.
+        </p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-pink/40 transition-colors">
-          <h3 class="text-2xl font-bold mb-3">Demand &amp; Lead Generation</h3>
-          <p class="text-gray-400 leading-relaxed">
-            Targeted, multi-channel campaigns that create genuine demand and deliver a pipeline
-            ready for prime time — not a spreadsheet of maybes.
-          </p>
+        <div class="reveal bg-iffort-dark border border-iffort-blue/30 rounded-3xl p-8 md:p-10">
+          <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-iffort-blue/20 text-iffort-blue flex items-center justify-center text-lg">✓</span>
+            You're a strong fit if…
+          </h3>
+          <ul class="space-y-4 text-gray-300">
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You're a <strong class="text-white">B2B or enterprise-facing business</strong> with a proven offer and real customers — you need demand, not product-market fit.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You have a <strong class="text-white">sales team ready to work qualified pipeline</strong> — leads dying in a spreadsheet waste both our time.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You think in <strong class="text-white">payback and pipeline, not impressions</strong> — and you'll give us CRM access so revenue attribution is real.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You can commit to <strong class="text-white">at least two quarters</strong> — engines compound; stunts don't.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>Leadership is <strong class="text-white">at the table</strong> — our best results (SHRM, Cowrks, Mozark) all had founder or CXO sponsorship.</span></li>
+          </ul>
         </div>
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-blue/40 transition-colors">
-          <h3 class="text-2xl font-bold mb-3">Content &amp; GTM Strategy</h3>
-          <p class="text-gray-400 leading-relaxed">
-            Stories, case studies, and go-to-market plans that make your brand the smartest voice in
-            the room. Your authority, bottled.
-          </p>
+
+        <div class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 md:p-10">
+          <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-iffort-pink/20 text-iffort-pink flex items-center justify-center text-lg">✕</span>
+            We'll pass if…
+          </h3>
+          <ul class="space-y-4 text-gray-400">
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You're pre-revenue or still searching for product-market fit — we scale engines, we don't find fit.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You want followers, virality, or awards — vanity metrics aren't a deliverable here.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You need a miracle this month — we'll show early signals in 30–45 days, but we won't promise overnight.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>Marketing is a cost center in your org and every rupee needs three approvals to test anything.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You won't share data — no CRM, no analytics, no attribution means we'd be guessing, and we don't guess.</span></li>
+          </ul>
         </div>
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-blue/40 transition-colors">
-          <h3 class="text-2xl font-bold mb-3">AI-Powered SEO &amp; GEO</h3>
-          <p class="text-gray-400 leading-relaxed">
-            Search has changed. We make you the cited answer in a world of zero-click, AI-generated
-            results — chosen before your competitor is even seen.
-          </p>
-        </div>
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-pink/40 transition-colors">
-          <h3 class="text-2xl font-bold mb-3">B2B AI Video Production</h3>
-          <p class="text-gray-400 leading-relaxed">
-            Let's kill the talking-head webinar. AI-enhanced video that makes complex, technical
-            subjects genuinely watchable.
-          </p>
-        </div>
+      </div>
+
+      <p class="reveal text-center text-gray-400 mt-12 text-lg">
+        Not sure which column you're in? That's literally what the meeting is for.
+        <a href="#book" data-booking-cta class="text-iffort-blue font-semibold hover:underline">Book it &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="reveal mb-14">
+        <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">Straight answers</p>
+        <h2 class="text-4xl md:text-5xl font-black mb-5">Questions serious buyers ask us</h2>
+        <p class="text-xl text-gray-400">If your question isn't here, bring it to the meeting — or email
+          <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.
+        </p>
+      </div>
+
+      <div class="reveal space-y-4">
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            Do you really turn clients away?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            Yes, regularly. Every case study on this page came from an engagement where we controlled the
+            variables that matter: real CRM access, a sales team that works the pipeline, and leadership
+            that shows up. When those aren't there, results become luck — and we don't sell luck. If the
+            teardown says we're not the right partner, we'll tell you in week one and point you somewhere
+            better suited. That discipline is exactly why our numbers hold up.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            What kind of returns can we actually expect?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            Honest answer: it depends on your deal size, sales cycle, and starting funnel — anyone who
+            quotes you a return before seeing your data is guessing. What we can show you is our track
+            record: 5X ROAS and ₹8.25 Cr+ in Salesforce-attributed revenue for Cowrks, 45,000+ qualified
+            leads at 40% YoY growth for SHRM, a predictable SQL pipeline for Channelplay. In Phase 1 we
+            build a payback model specific to your business, so you know the target — and how we'll
+            measure it — before you commit a rupee to Phase 2.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            Do you guarantee results?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            No — and you should run from anyone who does. What we guarantee is the system: a fixed-scope
+            teardown with a go/no-go recommendation, hypothesis-driven sprints where losers get killed
+            fast, and spend that scales only behind proven lead quality. Because we're selective about
+            who we take on, we've never had to hide behind a "results may vary" footnote — the
+            selectivity is the guarantee.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            How fast will we see something?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            First signals — lead flow, CPL benchmarks, message-market resonance — typically inside 30–45
+            days of sprints going live. Real compounding takes two quarters; that's when governance kicks
+            in and the engine starts beating its own benchmarks (SHRM's 40% YoY growth came from year-long
+            discipline, not a launch spike). If you need revenue this month to survive, we're the wrong
+            call and we'll say so.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            Why not just hire an in-house marketing team?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            You probably should — eventually. A senior marketing leader takes six-plus months to ramp and
+            carries a seven-figure annual cost before they've proven a channel. We plug in as the demand
+            engine now: senior operators across paid, ABM, AI-first SEO/GEO, content, and video from day
+            one. Then we document the playbooks so what we build is yours to run — with your future
+            in-house team, if that's the plan.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            Can you work with our existing marketing team?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            That's our favorite setup. We're force multipliers, not replacements — we bring the strategy,
+            attribution infrastructure, and channel expertise; your team brings product depth and
+            institutional knowledge. On HP's flagship event we operated as the content fulfillment center
+            inside a much larger stakeholder machine. Egos don't survive long here; pipelines do.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            How do you price engagements?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            Phase 1 (the teardown) is fixed-scope and fixed-price — you know exactly what you're buying.
+            Ongoing engagements are scoped from what the teardown finds, sized to your pipeline math so
+            the fee is a fraction of the revenue target it's accountable for. No percentage-of-ad-spend
+            models: those reward agencies for spending your money, not for making it back.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            What actually happens in the first meeting?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            Thirty minutes, no deck, no juniors. You walk us through your funnel and goals; we tell you
+            what we see — where demand is leaking, which channels we'd test first, and whether we're the
+            right partner for it. You leave with a working teardown of your funnel either way. If we're
+            not a fit, you've lost half an hour and gained a second opinion. If we are, you'll know
+            exactly what Phase 1 looks like.
+          </div>
+        </details>
+      </div>
+
+      <div class="reveal text-center mt-14">
+        <a href="#book" data-booking-cta
+           class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full">
+          Ask us the hard questions live &rarr;
+        </a>
       </div>
     </div>
   </section>
@@ -326,7 +614,7 @@
         <h2 class="text-4xl md:text-6xl font-black mb-6">Book a Meeting</h2>
         <p class="text-xl text-gray-400 max-w-2xl mx-auto">
           30 minutes with our strategy team. You bring the funnel, we bring the teardown.
-          Zero obligation, zero pitch theatre.
+          Zero obligation, zero pitch theatre — and a straight answer on whether we're the right partner.
         </p>
       </div>
 
@@ -427,7 +715,7 @@
         </div>
         <div>
           <h3 class="text-white font-bold mb-2">4. Performance figures</h3>
-          <p>Case study results shown on this page (including lead volumes, ROAS, and revenue figures) are historical outcomes achieved for specific clients under specific conditions. They are illustrative and not a guarantee of future results for your business.</p>
+          <p>Case study results shown on this page (including lead volumes, ROAS, and revenue figures) are historical outcomes achieved for specific clients under specific conditions. They are illustrative and not a guarantee of future results for your business. Iffort accepts engagements selectively and reserves the right to decline any inquiry.</p>
         </div>
         <div>
           <h3 class="text-white font-bold mb-2">5. Communications consent</h3>
@@ -450,6 +738,7 @@
         The next quarter is coming.<br />
         <span class="accent-gradient-text">Guess again, or engineer it.</span>
       </h2>
+      <p class="text-gray-400 text-lg mb-2">We take on a limited number of partners each quarter. The teardown is free either way.</p>
       <a href="#book" data-booking-cta
          class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-12 py-4 rounded-full mt-4">
         Book a Meeting &rarr;
@@ -482,6 +771,46 @@
       <p class="text-gray-600 text-sm border-t border-white/5 pt-8">&copy; <span id="year"></span> Iffort. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- FAQ structured data for search engines / AI answers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you really turn clients away?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, regularly. Every case study came from an engagement with real CRM access, a sales team that works the pipeline, and leadership that shows up. If the teardown says we're not the right partner, we say so in week one." }
+      },
+      {
+        "@type": "Question",
+        "name": "What kind of returns can we expect?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Returns depend on deal size, sales cycle, and starting funnel. Our track record: 5X ROAS and ₹8.25 Cr+ attributed revenue for Cowrks, 45,000+ qualified leads at 40% YoY growth for SHRM. Phase 1 builds a payback model specific to your business before you commit further." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you guarantee results?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — run from anyone who does. We guarantee the system: a fixed-scope teardown with a go/no-go recommendation, hypothesis-driven sprints, and spend that scales only behind proven lead quality." }
+      },
+      {
+        "@type": "Question",
+        "name": "How fast will we see results?",
+        "acceptedAnswer": { "@type": "Answer", "text": "First signals typically inside 30–45 days of sprints going live. Real compounding takes two quarters." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you work with our existing marketing team?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — we're force multipliers, not replacements. We bring strategy, attribution infrastructure, and channel expertise; your team brings product depth." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you price engagements?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Phase 1 is fixed-scope and fixed-price. Ongoing engagements are scoped from the teardown and sized to your pipeline math. No percentage-of-ad-spend models." }
+      }
+    ]
+  }
+  </script>
 
   <script>
     // ── CONFIG ─────────────────────────────────────────────────────────────
