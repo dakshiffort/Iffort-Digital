@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Iffort | Stop Marketing. Start Engineering Demand.</title>
-  <meta name="description" content="Iffort builds revenue engines for B2B companies — 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. We don't work with everyone. See if you qualify and book a meeting." />
+  <meta name="description" content="Iffort builds revenue engines for B2B companies. 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. We don't work with everyone. See if you qualify and book a meeting." />
 
   <!-- Open Graph for ad campaign link previews -->
   <meta property="og:title" content="Stop Marketing. Start Engineering Demand. | Iffort" />
-  <meta property="og:description" content="We take on a limited number of B2B partners each quarter. 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. See if you qualify — book a meeting." />
+  <meta property="og:description" content="We take on a limited number of B2B partners. 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. See if you qualify and book a meeting." />
   <meta property="og:type" content="website" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -56,7 +56,7 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .glow-cta:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.02);
       box-shadow: 0 0 32px rgba(255, 46, 99, 0.6), 0 0 80px rgba(255, 46, 99, 0.25);
     }
 
@@ -65,6 +65,18 @@
         linear-gradient(rgba(0, 201, 255, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0, 201, 255, 0.05) 1px, transparent 1px);
       background-size: 48px 48px;
+    }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #FF2E63, #FF9F1C, #00C9FF);
+      z-index: 60;
+      transition: width 0.1s linear;
     }
 
     @keyframes fadeUp {
@@ -90,7 +102,34 @@
     }
     .live-dot { animation: pulseDot 1.6s ease-in-out infinite; }
 
-    /* FAQ accordion */
+    @keyframes bounceChevron {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 10px); }
+    }
+    .scroll-chevron { animation: bounceChevron 1.8s ease-in-out infinite; }
+
+    /* Hero video */
+    .hero-video {
+      transition: opacity 1s ease;
+    }
+
+    /* Case study card tilt + image zoom */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.25s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      will-change: transform;
+    }
+    .tilt-card:hover {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 201, 255, 0.08);
+    }
+    .tilt-card .case-img {
+      transition: transform 0.5s ease;
+    }
+    .tilt-card:hover .case-img {
+      transform: scale(1.06);
+    }
+
+    /* FAQ + T&C accordion */
     details.faq summary { list-style: none; cursor: pointer; }
     details.faq summary::-webkit-details-marker { display: none; }
     details.faq .faq-icon { transition: transform 0.25s ease; }
@@ -98,14 +137,18 @@
     details.faq[open] summary { color: #ffffff; }
 
     @media (prefers-reduced-motion: reduce) {
-      .marquee-track, .live-dot { animation: none !important; }
+      .marquee-track, .live-dot, .scroll-chevron { animation: none !important; }
       .reveal { opacity: 1 !important; animation: none !important; }
-      details.faq .faq-icon { transition: none !important; }
+      details.faq .faq-icon, .tilt-card, .tilt-card .case-img { transition: none !important; }
+      .hero-video { display: none !important; }
+      #hero-particles { display: none !important; }
     }
   </style>
 </head>
 
 <body class="bg-iffort-dark text-white antialiased">
+
+  <div id="scroll-progress" aria-hidden="true"></div>
 
   <!-- ============ NAVBAR ============ -->
   <header class="fixed top-0 inset-x-0 z-50 bg-iffort-dark/80 backdrop-blur-lg border-b border-white/5">
@@ -128,14 +171,27 @@
   </header>
 
   <!-- ============ HERO ============ -->
-  <section id="top" class="relative grid-bg pt-40 pb-28 overflow-hidden">
-    <div class="absolute -top-40 -right-40 w-[520px] h-[520px] bg-iffort-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-40 -left-40 w-[520px] h-[520px] bg-iffort-pink/10 rounded-full blur-3xl pointer-events-none"></div>
+  <section id="top" class="relative min-h-[92vh] flex items-center pt-24 pb-16 overflow-hidden">
+    <!-- Background video (desktop) -->
+    <video id="hero-video" autoplay muted playsinline preload="auto"
+           class="hero-video hidden md:block absolute inset-0 w-full h-full object-cover z-0 opacity-0">
+      <source src="assets/hero.mp4" type="video/mp4" />
+    </video>
 
-    <div class="relative max-w-5xl mx-auto px-6 text-center">
-      <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-xs uppercase tracking-widest text-gray-300 mb-8">
+    <!-- Readability overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-iffort-dark/85 via-iffort-dark/60 to-iffort-dark/90 z-[1] pointer-events-none"></div>
+
+    <!-- Fallback gradients (mobile + while video loads) -->
+    <div class="absolute -top-40 -right-40 w-[520px] h-[520px] bg-iffort-blue/10 rounded-full blur-3xl pointer-events-none z-0"></div>
+    <div class="absolute -bottom-40 -left-40 w-[520px] h-[520px] bg-iffort-pink/10 rounded-full blur-3xl pointer-events-none z-0"></div>
+
+    <!-- Interactive particle network -->
+    <canvas id="hero-particles" class="absolute inset-0 w-full h-full z-[2]" aria-hidden="true"></canvas>
+
+    <div class="relative max-w-5xl mx-auto px-6 text-center z-10">
+      <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur rounded-full px-4 py-1.5 text-xs uppercase tracking-widest text-gray-300 mb-8">
         <span class="live-dot w-2 h-2 rounded-full bg-iffort-blue inline-block"></span>
-        Accepting a limited number of new partners this quarter
+        Accepting a limited number of new partners
       </div>
 
       <h1 class="text-5xl md:text-7xl font-black leading-[1.05] mb-8">
@@ -143,13 +199,13 @@
         <span class="accent-gradient-text">Start engineering demand.</span>
       </h1>
 
-      <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-6 leading-relaxed">
+      <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-6 leading-relaxed">
         Your competitors are still buying impressions and praying. We build
         <span class="text-white font-semibold">AI-powered revenue engines</span> with attribution you
-        can defend in a board meeting. And no — <span class="text-white font-semibold">we don't work with everyone.</span>
+        can defend in a board meeting. And no, <span class="text-white font-semibold">we don't work with everyone.</span>
       </p>
 
-      <p class="text-sm uppercase tracking-widest text-gray-500 mb-10">
+      <p class="text-sm uppercase tracking-widest text-gray-400 mb-10">
         45,000+ qualified leads &middot; 5X ROAS &middot; ₹8.25 Cr+ attributed revenue
       </p>
 
@@ -159,20 +215,26 @@
           Book a Meeting &rarr;
         </a>
         <a href="#fit"
-           class="border border-white/15 hover:border-iffort-blue/60 hover:text-iffort-blue text-gray-300 font-semibold text-lg px-10 py-4 rounded-full transition-colors">
+           class="border border-white/20 hover:border-iffort-blue/60 hover:text-iffort-blue backdrop-blur text-gray-200 font-semibold text-lg px-10 py-4 rounded-full transition-colors">
           See If You Qualify
         </a>
       </div>
 
-      <p class="mt-6 text-xs text-gray-500">
-        30 minutes. No pitch deck. You leave with a growth teardown of your funnel — free, whether or not we work together.
+      <p class="mt-6 text-xs text-gray-400">
+        30 minutes. No pitch deck. You leave with a free growth teardown of your funnel, whether or not we work together.
       </p>
     </div>
+
+    <a href="#manifesto" class="scroll-chevron absolute bottom-6 left-1/2 text-gray-400 hover:text-white transition-colors z-10" aria-label="Scroll to next section">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+      </svg>
+    </a>
   </section>
 
   <!-- ============ CLIENT MARQUEE ============ -->
-  <section class="py-10 border-y border-white/5 bg-iffort-navy/40 overflow-hidden">
-    <p class="text-center text-xs uppercase tracking-widest text-gray-500 mb-6">Trusted by teams that outgrow their category</p>
+  <section class="py-8 border-y border-white/5 bg-iffort-navy/40 overflow-hidden">
+    <p class="text-center text-xs uppercase tracking-widest text-gray-500 mb-5">Trusted by teams that outgrow their category</p>
     <div class="marquee-track gap-16 text-2xl font-bold text-gray-600" aria-hidden="false">
       <div class="flex gap-16 items-center shrink-0 px-8">
         <span>SHRM</span><span>HP</span><span>KOGO</span><span>Circles.Life</span><span>Business Standard</span>
@@ -186,9 +248,9 @@
   </section>
 
   <!-- ============ MANIFESTO / NARRATIVE ============ -->
-  <section id="manifesto" class="py-28">
+  <section id="manifesto" class="py-16 md:py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal max-w-3xl mb-20">
+      <div class="reveal max-w-3xl mb-12">
         <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">The Shift</p>
         <h2 class="text-4xl md:text-6xl font-black leading-tight mb-6">
           The old playbook is <span class="text-iffort-pink line-through decoration-4">working</span> dead.
@@ -201,7 +263,7 @@
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-blue/40 transition-colors">
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-blue/40">
           <div class="text-iffort-blue text-5xl font-black mb-4">01</div>
           <h3 class="text-2xl font-bold mb-3">Be the answer, not the ad</h3>
           <p class="text-gray-400 leading-relaxed">
@@ -209,20 +271,20 @@
             Gemini, and Google's AI answer your buyer's question. Zero-click is not a threat when you own the answer.
           </p>
         </div>
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-pink/40 transition-colors">
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-pink/40">
           <div class="text-iffort-pink text-5xl font-black mb-4">02</div>
           <h3 class="text-2xl font-bold mb-3">Pipeline, not impressions</h3>
           <p class="text-gray-400 leading-relaxed">
             Every campaign maps to ICPs and closes the loop with your CRM. We scale spend only when
-            lead quality is proven — algorithmic governance, not gut feel.
+            lead quality is proven. Algorithmic governance, not gut feel.
           </p>
         </div>
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-amber/40 transition-colors">
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-amber/40">
           <div class="text-iffort-amber text-5xl font-black mb-4">03</div>
           <h3 class="text-2xl font-bold mb-3">Attribution or it didn't happen</h3>
           <p class="text-gray-400 leading-relaxed">
             One source of truth from first touch to closed revenue. When we say 5X ROAS, it's
-            Salesforce-verified — not a vanity dashboard.
+            Salesforce-verified, not a vanity dashboard.
           </p>
         </div>
       </div>
@@ -230,29 +292,29 @@
   </section>
 
   <!-- ============ PROOF / STATS + CASE STUDIES ============ -->
-  <section id="work" class="py-28 bg-iffort-navy/40 border-y border-white/5">
+  <section id="work" class="py-16 md:py-20 bg-iffort-navy/40 border-y border-white/5">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal text-center mb-16">
+      <div class="reveal text-center mb-12">
         <p class="text-iffort-pink text-sm font-bold uppercase tracking-widest mb-4">Receipts, not promises</p>
         <h2 class="text-4xl md:text-5xl font-black mb-4">Case studies our clients take to the board</h2>
         <p class="text-lg text-gray-400 max-w-2xl mx-auto">Six engagements. Six different industries. One pattern: measurable pipeline and revenue, not activity reports.</p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-10 px-4">
-          <div class="gradient-text text-4xl md:text-5xl font-black mb-2">45,000+</div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
+        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-9 px-4">
+          <div class="gradient-text text-4xl md:text-5xl font-black mb-2 tabular-nums" data-count="45000" data-suffix="+">0+</div>
           <p class="text-gray-400 text-sm">Qualified leads for a global HRTech giant</p>
         </div>
-        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-10 px-4">
-          <div class="gradient-text text-4xl md:text-5xl font-black mb-2">5X</div>
+        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-9 px-4">
+          <div class="gradient-text text-4xl md:text-5xl font-black mb-2 tabular-nums" data-count="5" data-suffix="X">0X</div>
           <p class="text-gray-400 text-sm">ROAS in under 12 months</p>
         </div>
-        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-10 px-4">
-          <div class="gradient-text text-4xl md:text-5xl font-black mb-2">₹8.25 Cr+</div>
+        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-9 px-4">
+          <div class="gradient-text text-4xl md:text-5xl font-black mb-2 tabular-nums" data-count="8.25" data-decimals="2" data-prefix="₹" data-suffix=" Cr+">₹0 Cr+</div>
           <p class="text-gray-400 text-sm">Attributed revenue, Salesforce-verified</p>
         </div>
-        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-10 px-4">
-          <div class="gradient-text text-4xl md:text-5xl font-black mb-2">40%</div>
+        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-9 px-4">
+          <div class="gradient-text text-4xl md:text-5xl font-black mb-2 tabular-nums" data-count="40" data-suffix="%">0%</div>
           <p class="text-gray-400 text-sm">YoY growth across India &amp; MENA</p>
         </div>
       </div>
@@ -260,119 +322,149 @@
       <div class="grid md:grid-cols-2 gap-8">
 
         <!-- SHRM -->
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-blue/40 transition-colors">
-          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">HRTech &middot; Lead Gen &middot; India + MENA</p>
-          <h3 class="text-2xl font-bold mb-4">Scaling a global HR giant without diluting lead quality</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            <span class="text-white font-semibold">The problem:</span> SHRM needed aggressive lead
-            volume without losing control of cost-per-lead across two wildly different markets.
-          </p>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            <span class="text-white font-semibold">What we did:</span> surgical ICP mapping, a
-            multi-layered messaging framework, and algorithmic budget governance — spend scaled only
-            when ICP alignment was proven.
-          </p>
-          <div class="mt-auto flex flex-wrap gap-3">
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">45,000+</span> qualified leads</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">40%</span> YoY growth</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">₹1.3 Cr</span> budget optimized</span>
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-blue/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/hrtech.webp" alt="Global HRTech lead generation case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">HRTech &middot; Lead Gen &middot; India + MENA</p>
+            <h3 class="text-2xl font-bold mb-4">Scaling a global HR giant without diluting lead quality</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+              <span class="text-white font-semibold">The problem:</span> SHRM needed aggressive lead
+              volume without losing control of cost per lead across two wildly different markets.
+            </p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <span class="text-white font-semibold">What we did:</span> surgical ICP mapping, a
+              multi-layered messaging framework, and algorithmic budget governance. Spend scaled only
+              when ICP alignment was proven.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">45,000+</span> qualified leads</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">40%</span> YoY growth</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">₹1.3 Cr</span> budget optimized</span>
+            </div>
           </div>
         </article>
 
         <!-- Cowrks -->
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-pink/40 transition-colors">
-          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">Real Estate &middot; Revenue Ops &middot; India</p>
-          <h3 class="text-2xl font-bold mb-4">From fragmented ad spend to a 5X revenue engine</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            <span class="text-white font-semibold">The problem:</span> a premium coworking leader with
-            no single source of truth — nobody could say which campaigns drove profit and which drove noise.
-          </p>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            <span class="text-white font-semibold">What we did:</span> wired Salesforce to Google Ads and
-            GA4 for tracking integrity, rebuilt the funnel end to end, and shifted budget to high-margin products.
-          </p>
-          <div class="mt-auto flex flex-wrap gap-3">
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">₹8.25 Cr+</span> attributed revenue</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">5X</span> ROAS</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">1,059</span> MQLs</span>
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-pink/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/coworking.webp" alt="Premium coworking revenue engine case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">Real Estate &middot; Revenue Ops &middot; India</p>
+            <h3 class="text-2xl font-bold mb-4">From fragmented ad spend to a 5X revenue engine</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+              <span class="text-white font-semibold">The problem:</span> a premium coworking leader with
+              no single source of truth. Nobody could say which campaigns drove profit and which drove noise.
+            </p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <span class="text-white font-semibold">What we did:</span> wired Salesforce to Google Ads and
+              GA4 for tracking integrity, rebuilt the funnel end to end, and shifted budget to high-margin products.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">₹8.25 Cr+</span> attributed revenue</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">5X</span> ROAS</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">1,059</span> MQLs</span>
+            </div>
           </div>
         </article>
 
         <!-- Mozark -->
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-amber/40 transition-colors">
-          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">Deep-Tech &middot; Rebranding &middot; Global</p>
-          <h3 class="text-2xl font-bold mb-4">Rebranding a deep-tech player for enterprise dominance</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            <span class="text-white font-semibold">The problem:</span> Mozark's brand still looked like
-            its startup origins — visual fragmentation was costing them enterprise contracts with Tier-1 telcos.
-          </p>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            <span class="text-white font-semibold">What we did:</span> engineered a scalable 4-pillar brand
-            framework (Measure, Observe, Care, Act) with a modular visual architecture built for interoperability.
-          </p>
-          <div class="mt-auto flex flex-wrap gap-3">
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">Enterprise-grade</span> repositioning</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm">Faster <span class="text-iffort-amber font-bold">sales velocity</span></span>
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-amber/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/deeptech.webp" alt="Deep-tech rebranding case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">Deep-Tech &middot; Rebranding &middot; Global</p>
+            <h3 class="text-2xl font-bold mb-4">Rebranding a deep-tech player for enterprise dominance</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+              <span class="text-white font-semibold">The problem:</span> Mozark's brand still looked like
+              its startup origins, and visual fragmentation was costing enterprise contracts with Tier-1 telcos.
+            </p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <span class="text-white font-semibold">What we did:</span> engineered a scalable 4-pillar brand
+              framework (Measure, Observe, Care, Act) with a modular visual architecture built for interoperability.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">Enterprise-grade</span> repositioning</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm">Faster <span class="text-iffort-amber font-bold">sales velocity</span></span>
+            </div>
           </div>
         </article>
 
         <!-- HP -->
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-blue/40 transition-colors">
-          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">Enterprise IT &middot; Content Strategy &middot; Events</p>
-          <h3 class="text-2xl font-bold mb-4">One voice for a global IT leader's flagship event</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            <span class="text-white font-semibold">The problem:</span> hundreds of stakeholders, no
-            unified North Star — complex IT solutions fragmenting into inconsistent C-suite messaging.
-          </p>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            <span class="text-white font-semibold">What we did:</span> served as the Content Fulfillment
-            Center — a Strategic Event Framework and creative bible aligning keynotes, editorial, multimedia, and social.
-          </p>
-          <div class="mt-auto flex flex-wrap gap-3">
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">360°</span> content delivery</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">Multi-region</span> stakeholder alignment</span>
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-blue/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/enterpriseit.webp" alt="Enterprise IT event content strategy case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">Enterprise IT &middot; Content Strategy &middot; Events</p>
+            <h3 class="text-2xl font-bold mb-4">One voice for a global IT leader's flagship event</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+              <span class="text-white font-semibold">The problem:</span> hundreds of stakeholders and no
+              unified North Star. Complex IT solutions were fragmenting into inconsistent C-suite messaging.
+            </p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <span class="text-white font-semibold">What we did:</span> served as the Content Fulfillment
+              Center, building a Strategic Event Framework and creative bible that aligned keynotes, editorial, multimedia, and social.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">360°</span> content delivery</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">Multi-region</span> stakeholder alignment</span>
+            </div>
           </div>
         </article>
 
         <!-- Channelplay -->
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-pink/40 transition-colors">
-          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">B2B Services &middot; ABM &middot; India + MENA</p>
-          <h3 class="text-2xl font-bold mb-4">From cold outreach to an inbound-authority lead engine</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            <span class="text-white font-semibold">The problem:</span> long, complex B2B cycles for
-            high-touch retail services — and a pipeline dependent on cold outreach to C-suite buyers.
-          </p>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            <span class="text-white font-semibold">What we did:</span> built a unified lead engine across
-            Google Search, LinkedIn, and ABM, backed by whitepapers and webinars that did the selling first.
-          </p>
-          <div class="mt-auto flex flex-wrap gap-3">
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">Daily</span> inbound inquiries</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">Predictable</span> SQL pipeline</span>
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-pink/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/retail.webp" alt="Retail distribution B2B lead engine case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">B2B Services &middot; ABM &middot; India + MENA</p>
+            <h3 class="text-2xl font-bold mb-4">From cold outreach to an inbound-authority lead engine</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+              <span class="text-white font-semibold">The problem:</span> long, complex B2B cycles for
+              high-touch retail services, with a pipeline dependent on cold outreach to C-suite buyers.
+            </p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <span class="text-white font-semibold">What we did:</span> built a unified lead engine across
+              Google Search, LinkedIn, and ABM, backed by whitepapers and webinars that did the selling first.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">Daily</span> inbound inquiries</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">Predictable</span> SQL pipeline</span>
+            </div>
           </div>
         </article>
 
         <!-- Reckitt -->
-        <article class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 flex flex-col hover:border-iffort-amber/40 transition-colors">
-          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">FMCG &middot; ABM + Events &middot; UAE</p>
-          <h3 class="text-2xl font-bold mb-4">Filling a room with CXOs for a global hygiene brand</h3>
-          <p class="text-gray-400 text-sm leading-relaxed mb-4">
-            <span class="text-white font-semibold">The problem:</span> Reckitt needed niche decision-makers
-            from Hospitality and F&amp;B to physically show up to a business breakfast at DWTC.
-          </p>
-          <p class="text-gray-400 text-sm leading-relaxed mb-6">
-            <span class="text-white font-semibold">What we did:</span> a 45-day multi-touch campaign —
-            AI-powered data enrichment, LinkedIn ABM, cold calling — plus the full premium offline experience.
-          </p>
-          <div class="mt-auto flex flex-wrap gap-3">
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">55+</span> qualified leads</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">15+</span> CXOs in the room</span>
-            <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">45-day</span> campaign</span>
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-amber/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/hygiene.webp" alt="Global hygiene brand ABM and event marketing case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">FMCG &middot; ABM + Events &middot; UAE</p>
+            <h3 class="text-2xl font-bold mb-4">Filling a room with CXOs for a global hygiene brand</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+              <span class="text-white font-semibold">The problem:</span> Reckitt needed niche decision-makers
+              from Hospitality and F&amp;B to physically show up to a business breakfast at DWTC.
+            </p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <span class="text-white font-semibold">What we did:</span> a 45-day multi-touch campaign:
+              AI-powered data enrichment, LinkedIn ABM, cold calling, plus the full premium offline experience.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">55+</span> qualified leads</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">15+</span> CXOs in the room</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">45-day</span> campaign</span>
+            </div>
           </div>
         </article>
       </div>
 
-      <div class="reveal text-center mt-14">
+      <div class="reveal text-center mt-10">
         <a href="#book" data-booking-cta
            class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full">
           Want numbers like these? Book a Meeting &rarr;
@@ -382,38 +474,38 @@
   </section>
 
   <!-- ============ PROCESS ============ -->
-  <section id="process" class="py-28">
+  <section id="process" class="py-16 md:py-20">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal max-w-3xl mb-16">
+      <div class="reveal max-w-3xl mb-10">
         <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">How an engagement works</p>
         <h2 class="text-4xl md:text-5xl font-black mb-6">No guesswork. A sequence.</h2>
-        <p class="text-xl text-gray-400">We don't start with a retainer. We start by finding exactly where your revenue engine is broken — then we fix it in phases, each one earning the next.</p>
+        <p class="text-xl text-gray-400">We don't start with a retainer. We start by finding exactly where your revenue engine is broken. Then we fix it in phases, each one earning the next.</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8">
-          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-2">Phase 1 &middot; Weeks 1–3</p>
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-2">Phase 1 &middot; Weeks 1-3</p>
           <h3 class="text-2xl font-bold mb-3">The Teardown</h3>
           <p class="text-gray-400 leading-relaxed mb-4">
             A fixed-scope audit of your funnel, attribution, ICPs, and channel economics. We map the gap
-            between where you are and your revenue goal — and tell you honestly if we can close it.
+            between where you are and your revenue goal, and we tell you honestly if we can close it.
           </p>
           <p class="text-sm text-gray-500">You get: a written teardown, a payback model, and a go/no-go recommendation. Even if the answer is no.</p>
         </div>
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8">
-          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-2">Phase 2 &middot; Weeks 4–12</p>
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-2">Phase 2 &middot; Weeks 4-12</p>
           <h3 class="text-2xl font-bold mb-3">Proof Sprints</h3>
           <p class="text-gray-400 leading-relaxed mb-4">
-            Hypothesis-driven experiments across the channels the teardown flagged — paid, ABM, AI-first
+            Hypothesis-driven experiments across the channels the teardown flagged: paid, ABM, AI-first
             SEO/GEO, content, events. Weekly reviews on CPL, lead quality, and pipeline contribution.
           </p>
           <p class="text-sm text-gray-500">You get: proven channels with unit economics, killed losers, and a CRM-verified pipeline forming.</p>
         </div>
-        <div class="reveal bg-white/5 border border-white/10 rounded-3xl p-8">
-          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-2">Phase 3 &middot; Quarter 2 onward</p>
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-2">Phase 3 &middot; Scale</p>
           <h3 class="text-2xl font-bold mb-3">Scale &amp; Systemize</h3>
           <p class="text-gray-400 leading-relaxed mb-4">
-            Budgets scale only behind proven ICP alignment — the same algorithmic governance that took
+            Budgets scale only behind proven ICP alignment, the same algorithmic governance that took
             SHRM to 45,000+ qualified leads and Cowrks to 5X ROAS. Dashboards report revenue, not activity.
           </p>
           <p class="text-sm text-gray-500">You get: a compounding revenue engine, documented playbooks, and numbers your CFO signs off on.</p>
@@ -423,49 +515,48 @@
   </section>
 
   <!-- ============ FIT / QUALIFICATION ============ -->
-  <section id="fit" class="py-28 bg-iffort-navy/40 border-y border-white/5">
+  <section id="fit" class="py-16 md:py-20 bg-iffort-navy/40 border-y border-white/5">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="reveal max-w-3xl mb-16">
+      <div class="reveal max-w-3xl mb-10">
         <p class="text-iffort-pink text-sm font-bold uppercase tracking-widest mb-4">We choose our partners carefully</p>
         <h2 class="text-4xl md:text-5xl font-black mb-6">We don't work with everyone.<br />Here's how to know if that's you.</h2>
         <p class="text-xl text-gray-400">
           Every result on this page came from a partnership where both sides were all-in. We take on a
-          limited number of new partners each quarter so that never changes — which means we say no more
-          often than we say yes.
+          limited number of new partners so that never changes, which means we say no more often than we say yes.
         </p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
-        <div class="reveal bg-iffort-dark border border-iffort-blue/30 rounded-3xl p-8 md:p-10">
+        <div class="reveal tilt-card bg-iffort-dark border border-iffort-blue/30 rounded-3xl p-8 md:p-10">
           <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
             <span class="w-8 h-8 rounded-full bg-iffort-blue/20 text-iffort-blue flex items-center justify-center text-lg">✓</span>
             You're a strong fit if…
           </h3>
           <ul class="space-y-4 text-gray-300">
-            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You're a <strong class="text-white">B2B or enterprise-facing business</strong> with a proven offer and real customers — you need demand, not product-market fit.</span></li>
-            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You have a <strong class="text-white">sales team ready to work qualified pipeline</strong> — leads dying in a spreadsheet waste both our time.</span></li>
-            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You think in <strong class="text-white">payback and pipeline, not impressions</strong> — and you'll give us CRM access so revenue attribution is real.</span></li>
-            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You can commit to <strong class="text-white">at least two quarters</strong> — engines compound; stunts don't.</span></li>
-            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>Leadership is <strong class="text-white">at the table</strong> — our best results (SHRM, Cowrks, Mozark) all had founder or CXO sponsorship.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You're a <strong class="text-white">B2B or enterprise-facing business</strong> with a proven offer and real customers. You need demand, not product-market fit.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You have a <strong class="text-white">sales team ready to work qualified pipeline.</strong> Leads dying in a spreadsheet waste everyone's time.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You think in <strong class="text-white">payback and pipeline, not impressions,</strong> and you'll give us CRM access so revenue attribution is real.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You can commit to <strong class="text-white">at least two quarters.</strong> Engines compound; stunts don't.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>Leadership is <strong class="text-white">at the table.</strong> Our best results (SHRM, Cowrks, Mozark) all had founder or CXO sponsorship.</span></li>
           </ul>
         </div>
 
-        <div class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 md:p-10">
+        <div class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl p-8 md:p-10">
           <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
             <span class="w-8 h-8 rounded-full bg-iffort-pink/20 text-iffort-pink flex items-center justify-center text-lg">✕</span>
             We'll pass if…
           </h3>
           <ul class="space-y-4 text-gray-400">
-            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You're pre-revenue or still searching for product-market fit — we scale engines, we don't find fit.</span></li>
-            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You want followers, virality, or awards — vanity metrics aren't a deliverable here.</span></li>
-            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You need a miracle this month — we'll show early signals in 30–45 days, but we won't promise overnight.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You're pre-revenue or still searching for product-market fit. We scale engines, we don't find fit.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You want followers, virality, or awards. Vanity metrics aren't a deliverable here.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You need a miracle this month. We'll show early signals in 30 to 45 days, but we won't promise overnight.</span></li>
             <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>Marketing is a cost center in your org and every rupee needs three approvals to test anything.</span></li>
-            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You won't share data — no CRM, no analytics, no attribution means we'd be guessing, and we don't guess.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You won't share data. No CRM, no analytics, no attribution means we'd be guessing, and we don't guess.</span></li>
           </ul>
         </div>
       </div>
 
-      <p class="reveal text-center text-gray-400 mt-12 text-lg">
+      <p class="reveal text-center text-gray-400 mt-10 text-lg">
         Not sure which column you're in? That's literally what the meeting is for.
         <a href="#book" data-booking-cta class="text-iffort-blue font-semibold hover:underline">Book it &rarr;</a>
       </p>
@@ -473,12 +564,12 @@
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section id="faq" class="py-28">
+  <section id="faq" class="py-16 md:py-20">
     <div class="max-w-4xl mx-auto px-6">
-      <div class="reveal mb-14">
+      <div class="reveal mb-10">
         <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">Straight answers</p>
         <h2 class="text-4xl md:text-5xl font-black mb-5">Questions serious buyers ask us</h2>
-        <p class="text-xl text-gray-400">If your question isn't here, bring it to the meeting — or email
+        <p class="text-xl text-gray-400">If your question isn't here, bring it to the meeting, or email
           <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.
         </p>
       </div>
@@ -493,7 +584,7 @@
           <div class="pb-6 text-gray-400 leading-relaxed">
             Yes, regularly. Every case study on this page came from an engagement where we controlled the
             variables that matter: real CRM access, a sales team that works the pipeline, and leadership
-            that shows up. When those aren't there, results become luck — and we don't sell luck. If the
+            that shows up. When those aren't there, results become luck, and we don't sell luck. If the
             teardown says we're not the right partner, we'll tell you in week one and point you somewhere
             better suited. That discipline is exactly why our numbers hold up.
           </div>
@@ -505,12 +596,12 @@
             <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
           </summary>
           <div class="pb-6 text-gray-400 leading-relaxed">
-            Honest answer: it depends on your deal size, sales cycle, and starting funnel — anyone who
+            Honest answer: it depends on your deal size, sales cycle, and starting funnel. Anyone who
             quotes you a return before seeing your data is guessing. What we can show you is our track
             record: 5X ROAS and ₹8.25 Cr+ in Salesforce-attributed revenue for Cowrks, 45,000+ qualified
-            leads at 40% YoY growth for SHRM, a predictable SQL pipeline for Channelplay. In Phase 1 we
-            build a payback model specific to your business, so you know the target — and how we'll
-            measure it — before you commit a rupee to Phase 2.
+            leads at 40% YoY growth for SHRM, and a predictable SQL pipeline for Channelplay. In Phase 1 we
+            build a payback model specific to your business, so you know the target and how we'll
+            measure it before you commit a rupee to Phase 2.
           </div>
         </details>
 
@@ -520,11 +611,11 @@
             <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
           </summary>
           <div class="pb-6 text-gray-400 leading-relaxed">
-            No — and you should run from anyone who does. What we guarantee is the system: a fixed-scope
+            No, and you should run from anyone who does. What we guarantee is the system: a fixed-scope
             teardown with a go/no-go recommendation, hypothesis-driven sprints where losers get killed
-            fast, and spend that scales only behind proven lead quality. Because we're selective about
-            who we take on, we've never had to hide behind a "results may vary" footnote — the
-            selectivity is the guarantee.
+            fast, and spend that scales only behind proven lead quality. We're selective about who we
+            take on, and that selectivity is the guarantee. We've never needed to hide behind a
+            "results may vary" footnote.
           </div>
         </details>
 
@@ -534,11 +625,11 @@
             <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
           </summary>
           <div class="pb-6 text-gray-400 leading-relaxed">
-            First signals — lead flow, CPL benchmarks, message-market resonance — typically inside 30–45
-            days of sprints going live. Real compounding takes two quarters; that's when governance kicks
-            in and the engine starts beating its own benchmarks (SHRM's 40% YoY growth came from year-long
-            discipline, not a launch spike). If you need revenue this month to survive, we're the wrong
-            call and we'll say so.
+            First signals typically show inside 30 to 45 days of sprints going live: lead flow, CPL
+            benchmarks, message-market resonance. Real compounding takes two quarters. That's when
+            governance kicks in and the engine starts beating its own benchmarks (SHRM's 40% YoY growth
+            came from year-long discipline, not a launch spike). If you need revenue this month to
+            survive, we're the wrong call and we'll say so.
           </div>
         </details>
 
@@ -548,11 +639,11 @@
             <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
           </summary>
           <div class="pb-6 text-gray-400 leading-relaxed">
-            You probably should — eventually. A senior marketing leader takes six-plus months to ramp and
+            You probably should, eventually. A senior marketing leader takes six-plus months to ramp and
             carries a seven-figure annual cost before they've proven a channel. We plug in as the demand
             engine now: senior operators across paid, ABM, AI-first SEO/GEO, content, and video from day
-            one. Then we document the playbooks so what we build is yours to run — with your future
-            in-house team, if that's the plan.
+            one. Then we document the playbooks so what we build is yours to run, with your future
+            in-house team if that's the plan.
           </div>
         </details>
 
@@ -562,7 +653,7 @@
             <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
           </summary>
           <div class="pb-6 text-gray-400 leading-relaxed">
-            That's our favorite setup. We're force multipliers, not replacements — we bring the strategy,
+            That's our favorite setup. We're force multipliers, not replacements. We bring the strategy,
             attribution infrastructure, and channel expertise; your team brings product depth and
             institutional knowledge. On HP's flagship event we operated as the content fulfillment center
             inside a much larger stakeholder machine. Egos don't survive long here; pipelines do.
@@ -575,7 +666,7 @@
             <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
           </summary>
           <div class="pb-6 text-gray-400 leading-relaxed">
-            Phase 1 (the teardown) is fixed-scope and fixed-price — you know exactly what you're buying.
+            Phase 1 (the teardown) is fixed-scope and fixed-price, so you know exactly what you're buying.
             Ongoing engagements are scoped from what the teardown finds, sized to your pipeline math so
             the fee is a fraction of the revenue target it's accountable for. No percentage-of-ad-spend
             models: those reward agencies for spending your money, not for making it back.
@@ -589,7 +680,7 @@
           </summary>
           <div class="pb-6 text-gray-400 leading-relaxed">
             Thirty minutes, no deck, no juniors. You walk us through your funnel and goals; we tell you
-            what we see — where demand is leaking, which channels we'd test first, and whether we're the
+            what we see: where demand is leaking, which channels we'd test first, and whether we're the
             right partner for it. You leave with a working teardown of your funnel either way. If we're
             not a fit, you've lost half an hour and gained a second opinion. If we are, you'll know
             exactly what Phase 1 looks like.
@@ -597,7 +688,7 @@
         </details>
       </div>
 
-      <div class="reveal text-center mt-14">
+      <div class="reveal text-center mt-10">
         <a href="#book" data-booking-cta
            class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full">
           Ask us the hard questions live &rarr;
@@ -607,14 +698,14 @@
   </section>
 
   <!-- ============ BOOKING / SECURE LEAD GATE ============ -->
-  <section id="book" class="py-28 bg-iffort-navy/40 border-y border-white/5">
+  <section id="book" class="py-16 md:py-20 bg-iffort-navy/40 border-y border-white/5">
     <div class="max-w-4xl mx-auto px-6">
-      <div class="reveal text-center mb-12">
+      <div class="reveal text-center mb-10">
         <p class="text-iffort-pink text-sm font-bold uppercase tracking-widest mb-4">The Only CTA That Matters</p>
         <h2 class="text-4xl md:text-6xl font-black mb-6">Book a Meeting</h2>
         <p class="text-xl text-gray-400 max-w-2xl mx-auto">
           30 minutes with our strategy team. You bring the funnel, we bring the teardown.
-          Zero obligation, zero pitch theatre — and a straight answer on whether we're the right partner.
+          Zero obligation, zero pitch theatre, and a straight answer on whether we're the right partner.
         </p>
       </div>
 
@@ -685,7 +776,7 @@
           </svg>
         </div>
         <h3 class="text-2xl font-bold mb-3">You're in. Pick a time that works.</h3>
-        <p class="text-gray-400 mb-8">Grab any open slot below — the invite lands in your inbox instantly.</p>
+        <p class="text-gray-400 mb-8">Grab any open slot below. The invite lands in your inbox instantly.</p>
         <a id="booking-link" href="#" target="_blank" rel="noopener noreferrer"
            class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-12 py-4 rounded-full mb-10">
           Open Booking Calendar &rarr;
@@ -696,49 +787,54 @@
     </div>
   </section>
 
-  <!-- ============ TERMS & CONDITIONS ============ -->
-  <section id="terms" class="py-24">
+  <!-- ============ TERMS & CONDITIONS (collapsible) ============ -->
+  <section id="terms" class="py-14">
     <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-black mb-8">Terms &amp; Conditions</h2>
-      <div class="space-y-6 text-gray-400 text-sm leading-relaxed bg-white/5 border border-white/10 rounded-3xl p-8 md:p-10">
-        <div>
-          <h3 class="text-white font-bold mb-2">1. Who we are</h3>
-          <p>This page is operated by Iffort, a global digital growth consultancy with offices in India, UAE, and Canada. For business inquiries, contact <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.</p>
+      <details class="faq bg-white/5 border border-white/10 rounded-3xl px-8 md:px-10">
+        <summary class="flex items-center justify-between gap-6 py-7">
+          <span class="text-2xl md:text-3xl font-black">Terms &amp; Conditions</span>
+          <span class="faq-icon shrink-0 text-iffort-pink text-3xl font-light">+</span>
+        </summary>
+        <div class="space-y-6 text-gray-400 text-sm leading-relaxed pb-8">
+          <div>
+            <h3 class="text-white font-bold mb-2">1. Who we are</h3>
+            <p>This page is operated by Iffort, a global digital growth consultancy with offices in India, UAE, and Canada. For business inquiries, contact <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">2. Your data &amp; secure access</h3>
+            <p>Details you submit through this page (name, company, work email) are transmitted over an encrypted HTTPS/TLS connection and used solely to schedule and prepare your meeting, and to respond to your inquiry. We do not sell, rent, or trade your personal information. You may request deletion of your data at any time by emailing <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">3. Meeting bookings</h3>
+            <p>Booking a meeting is free and carries no obligation. Meetings are consultative; nothing discussed constitutes a binding proposal until confirmed in a signed agreement. Scheduling is handled by a third-party calendar provider, which is subject to its own terms and privacy policy.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">4. Performance figures</h3>
+            <p>Case study results shown on this page (including lead volumes, ROAS, and revenue figures) are historical outcomes achieved for specific clients under specific conditions. They are illustrative and not a guarantee of future results for your business. Iffort accepts engagements selectively and reserves the right to decline any inquiry.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">5. Communications consent</h3>
+            <p>By submitting the form with the consent box checked, you agree that Iffort may contact you by email or phone regarding your inquiry. You can opt out at any time via the unsubscribe link in our emails or by writing to us.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">6. Full legal terms</h3>
+            <p>These highlights supplement, and do not replace, our full
+              <a href="https://www.iffort.com/terms-conditions/" target="_blank" rel="noopener noreferrer" class="text-iffort-blue hover:underline">Terms &amp; Conditions</a> and
+              <a href="https://www.iffort.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="text-iffort-blue hover:underline">Privacy Policy</a>.</p>
+          </div>
         </div>
-        <div>
-          <h3 class="text-white font-bold mb-2">2. Your data &amp; secure access</h3>
-          <p>Details you submit through this page (name, company, work email) are transmitted over an encrypted HTTPS/TLS connection and used solely to schedule and prepare your meeting, and to respond to your inquiry. We do not sell, rent, or trade your personal information. You may request deletion of your data at any time by emailing <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.</p>
-        </div>
-        <div>
-          <h3 class="text-white font-bold mb-2">3. Meeting bookings</h3>
-          <p>Booking a meeting is free and carries no obligation. Meetings are consultative; nothing discussed constitutes a binding proposal until confirmed in a signed agreement. Scheduling is handled by a third-party calendar provider, which is subject to its own terms and privacy policy.</p>
-        </div>
-        <div>
-          <h3 class="text-white font-bold mb-2">4. Performance figures</h3>
-          <p>Case study results shown on this page (including lead volumes, ROAS, and revenue figures) are historical outcomes achieved for specific clients under specific conditions. They are illustrative and not a guarantee of future results for your business. Iffort accepts engagements selectively and reserves the right to decline any inquiry.</p>
-        </div>
-        <div>
-          <h3 class="text-white font-bold mb-2">5. Communications consent</h3>
-          <p>By submitting the form with the consent box checked, you agree that Iffort may contact you by email or phone regarding your inquiry. You can opt out at any time via the unsubscribe link in our emails or by writing to us.</p>
-        </div>
-        <div>
-          <h3 class="text-white font-bold mb-2">6. Full legal terms</h3>
-          <p>These highlights supplement, and do not replace, our full
-            <a href="https://www.iffort.com/terms-conditions/" target="_blank" rel="noopener noreferrer" class="text-iffort-blue hover:underline">Terms &amp; Conditions</a> and
-            <a href="https://www.iffort.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="text-iffort-blue hover:underline">Privacy Policy</a>.</p>
-        </div>
-      </div>
+      </details>
     </div>
   </section>
 
   <!-- ============ FINAL CTA ============ -->
-  <section class="py-24 text-center grid-bg border-t border-white/5">
+  <section class="py-16 text-center grid-bg border-t border-white/5">
     <div class="max-w-3xl mx-auto px-6">
       <h2 class="text-4xl md:text-5xl font-black mb-6">
-        The next quarter is coming.<br />
-        <span class="accent-gradient-text">Guess again, or engineer it.</span>
+        Growth is either engineered<br />
+        <span class="accent-gradient-text">or accidental.</span>
       </h2>
-      <p class="text-gray-400 text-lg mb-2">We take on a limited number of partners each quarter. The teardown is free either way.</p>
+      <p class="text-gray-400 text-lg mb-2">We take on a limited number of partners. The teardown is free either way.</p>
       <a href="#book" data-booking-cta
          class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-12 py-4 rounded-full mt-4">
         Book a Meeting &rarr;
@@ -747,12 +843,12 @@
   </section>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="bg-iffort-navy border-t border-white/5 py-14">
+  <footer class="bg-iffort-navy border-t border-white/5 py-12">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="grid md:grid-cols-3 gap-10 mb-12">
+      <div class="grid md:grid-cols-3 gap-10 mb-10">
         <div>
           <p class="text-2xl font-extrabold mb-3">iffort<span class="text-iffort-pink">.</span></p>
-          <p class="text-gray-500 text-sm leading-relaxed">Precision execution. Real-world results. AI, technology, and digital marketing — engineered into one growth machine.</p>
+          <p class="text-gray-500 text-sm leading-relaxed">Precision execution. Real-world results. AI, technology, and digital marketing, engineered into one growth machine.</p>
         </div>
         <div>
           <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">Business Inquiries</p>
@@ -791,17 +887,17 @@
       {
         "@type": "Question",
         "name": "Do you guarantee results?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No — run from anyone who does. We guarantee the system: a fixed-scope teardown with a go/no-go recommendation, hypothesis-driven sprints, and spend that scales only behind proven lead quality." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No, and you should run from anyone who does. We guarantee the system: a fixed-scope teardown with a go/no-go recommendation, hypothesis-driven sprints, and spend that scales only behind proven lead quality." }
       },
       {
         "@type": "Question",
         "name": "How fast will we see results?",
-        "acceptedAnswer": { "@type": "Answer", "text": "First signals typically inside 30–45 days of sprints going live. Real compounding takes two quarters." }
+        "acceptedAnswer": { "@type": "Answer", "text": "First signals typically show inside 30 to 45 days of sprints going live. Real compounding takes two quarters." }
       },
       {
         "@type": "Question",
         "name": "Can you work with our existing marketing team?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes — we're force multipliers, not replacements. We bring strategy, attribution infrastructure, and channel expertise; your team brings product depth." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We're force multipliers, not replacements. We bring strategy, attribution infrastructure, and channel expertise; your team brings product depth." }
       },
       {
         "@type": "Question",
@@ -823,8 +919,108 @@
     const LEAD_ENDPOINT = '/api/send-email';
     // ───────────────────────────────────────────────────────────────────────
 
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('booking-link').href = BOOKING_URL;
+
+    // Hero video: fade in when ready, pause on the 4s hold frame like the main site
+    const heroVideo = document.getElementById('hero-video');
+    if (heroVideo && !reducedMotion) {
+      heroVideo.addEventListener('loadeddata', () => heroVideo.classList.remove('opacity-0'));
+      heroVideo.addEventListener('timeupdate', () => {
+        if (heroVideo.currentTime >= 4) heroVideo.pause();
+      });
+    }
+
+    // Scroll progress bar
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+      progressBar.style.width = (scrolled * 100) + '%';
+    }, { passive: true });
+
+    // Interactive particle network in the hero
+    (function initParticles() {
+      if (reducedMotion) return;
+      const canvas = document.getElementById('hero-particles');
+      const ctx = canvas.getContext('2d');
+      const colors = ['rgba(0,201,255,', 'rgba(255,46,99,', 'rgba(255,159,28,'];
+      let particles = [];
+      let mouse = { x: -9999, y: -9999 };
+      let raf;
+
+      function resize() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        const count = Math.min(90, Math.floor(canvas.width / 16));
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 1.8 + 0.6,
+          c: colors[Math.floor(Math.random() * colors.length)]
+        }));
+      }
+
+      function step() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const p of particles) {
+          // Gentle drift plus repulsion from the cursor
+          const dx = p.x - mouse.x, dy = p.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 140) {
+            p.vx += (dx / dist) * 0.06;
+            p.vy += (dy / dist) * 0.06;
+          }
+          p.vx = Math.max(-0.8, Math.min(0.8, p.vx));
+          p.vy = Math.max(-0.8, Math.min(0.8, p.vy));
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.c + '0.7)';
+          ctx.fill();
+        }
+        // Connect nearby particles
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i], b = particles[j];
+            const d = Math.hypot(a.x - b.x, a.y - b.y);
+            if (d < 110) {
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = 'rgba(0,201,255,' + (0.14 * (1 - d / 110)) + ')';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+        raf = requestAnimationFrame(step);
+      }
+
+      const hero = document.getElementById('top');
+      hero.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+      window.addEventListener('resize', resize);
+
+      // Only animate while the hero is on screen
+      new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { resize(); step(); }
+          else cancelAnimationFrame(raf);
+        });
+      }, { threshold: 0.05 }).observe(canvas);
+    })();
 
     // Scroll-reveal animation
     const observer = new IntersectionObserver((entries) => {
@@ -836,6 +1032,49 @@
       });
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Count-up animation for stat numbers
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        countObserver.unobserve(entry.target);
+        const el = entry.target;
+        const target = parseFloat(el.dataset.count);
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        if (reducedMotion) {
+          el.textContent = prefix + target.toLocaleString('en-IN', { minimumFractionDigits: decimals }) + suffix;
+          return;
+        }
+        const duration = 1600;
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const val = target * eased;
+          el.textContent = prefix + val.toLocaleString('en-IN', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-count]').forEach((el) => countObserver.observe(el));
+
+    // 3D tilt on cards
+    if (!reducedMotion && window.matchMedia('(hover: hover)').matches) {
+      document.querySelectorAll('.tilt-card').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width - 0.5;
+          const py = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = 'perspective(900px) rotateX(' + (-py * 5) + 'deg) rotateY(' + (px * 5) + 'deg) translateY(-2px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    }
 
     // Secure lead gate: capture + consent, then unlock the calendar
     const form = document.getElementById('lead-form');

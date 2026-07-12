@@ -5,7 +5,7 @@ folder so it can be published separately from the main site (the root `index.htm
 
 ## What's inside
 
-- **Single file**: `index.html` — no build step. Tailwind via CDN, vanilla JS, Inter font.
+- **Self-contained folder**: `index.html` plus `assets/` (hero video and compressed WebP case-study images). No build step; Tailwind via CDN, vanilla JS, Inter font.
 - **Primary CTA**: "Book a Meeting" — every CTA on the page points at one booking calendar link.
 - **Disruption narrative**: "Stop marketing. Start engineering demand." Hero → manifesto
   (the old playbook is dead) → proof (45,000+ leads, 5X ROAS, ₹8.25 Cr+ revenue, 40% YoY) →
