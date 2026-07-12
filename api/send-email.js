@@ -192,7 +192,7 @@ export default async function handler(req, res) {
     // Log the payload being sent to Resend API
     console.log('[Email API] Resend API call payload:', {
       from: 'Iffort Digital <onboarding@resend.dev>',
-      to: ['daksh.sharma@iffort.com'],
+      to: ['daksh.sharma@iffort.com', 'lav.singh@iffort.com'],
       replyTo: formData.email,
       subject: `New Contact Form: ${formData.service} - ${formData.name}`,
       htmlSize: htmlContent.length,
@@ -201,12 +201,11 @@ export default async function handler(req, res) {
     });
 
     // Send email using Resend
-    // Note: Resend account is in test mode and can only send to verified email addresses
-    // To send to kshipra.uniyal@iffort.com and lav.singh@iffort.com, verify the iffort.com domain at resend.com/domains
-    // For now, sending to daksh.sharma@iffort.com (verified test email)
+    // Note: delivery to lav.singh@iffort.com requires the iffort.com domain to be
+    // verified at resend.com/domains (test-mode accounts only reach verified addresses)
     const emailResponse = await resend.emails.send({
       from: 'Iffort Digital <onboarding@resend.dev>',
-      to: ['daksh.sharma@iffort.com'],
+      to: ['daksh.sharma@iffort.com', 'lav.singh@iffort.com'],
       replyTo: formData.email,
       subject: `New Contact Form: ${formData.service} - ${formData.name}`,
       html: htmlContent,

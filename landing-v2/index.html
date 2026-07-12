@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth scroll-pt-24">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iffort | Stop Marketing. Start Engineering Demand.</title>
+  <meta name="description" content="Iffort builds revenue engines for B2B companies. 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. We don't work with everyone. See if you qualify and book a meeting." />
+
+  <!-- Open Graph for ad campaign link previews -->
+  <meta property="og:title" content="Stop Marketing. Start Engineering Demand. | Iffort" />
+  <meta property="og:description" content="We take on a limited number of B2B partners. 45,000+ qualified leads, 5X ROAS, ₹8.25 Cr+ attributed revenue. See if you qualify and book a meeting." />
+  <meta property="og:type" content="website" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            iffort: {
+              navy: '#0f172a',
+              dark: '#020617',
+              pink: '#FF2E63',
+              blue: '#00C9FF',
+              amber: '#FF9F1C',
+              gray: '#F3F4F6'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #FFFFFF 0%, #00C9FF 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .accent-gradient-text {
+      background: linear-gradient(90deg, #FF2E63 0%, #FF9F1C 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glow-cta {
+      box-shadow: 0 0 24px rgba(255, 46, 99, 0.45), 0 0 60px rgba(255, 46, 99, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .glow-cta:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 32px rgba(255, 46, 99, 0.6), 0 0 80px rgba(255, 46, 99, 0.25);
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(0, 201, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 201, 255, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #FF2E63, #FF9F1C, #00C9FF);
+      z-index: 60;
+      transition: width 0.1s linear;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; }
+    .reveal.visible { animation: fadeUp 0.7s ease-out forwards; }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    .live-dot { animation: pulseDot 1.6s ease-in-out infinite; }
+
+    @keyframes bounceChevron {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 10px); }
+    }
+    .scroll-chevron { animation: bounceChevron 1.8s ease-in-out infinite; }
+
+    /* Hero video */
+    .hero-video {
+      transition: opacity 1s ease;
+    }
+
+    /* Case study card tilt + image zoom */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.25s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      will-change: transform;
+    }
+    .tilt-card:hover {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 201, 255, 0.08);
+    }
+    .tilt-card .case-img {
+      transition: transform 0.5s ease;
+    }
+    .tilt-card:hover .case-img {
+      transform: scale(1.06);
+    }
+
+    /* FAQ + T&C accordion */
+    details.faq summary { list-style: none; cursor: pointer; }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq .faq-icon { transition: transform 0.25s ease; }
+    details.faq[open] .faq-icon { transform: rotate(45deg); }
+    details.faq[open] summary { color: #ffffff; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track, .live-dot, .scroll-chevron { animation: none !important; }
+      .reveal { opacity: 1 !important; animation: none !important; }
+      details.faq .faq-icon, .tilt-card, .tilt-card .case-img { transition: none !important; }
+      .hero-video { display: none !important; }
+      #hero-particles { display: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-iffort-dark text-white antialiased">
+
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-iffort-dark/80 backdrop-blur-lg border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#top" class="text-2xl font-extrabold tracking-tight">
+        iffort<span class="text-iffort-pink">.</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm text-gray-300">
+        <a href="#manifesto" class="hover:text-white transition-colors">The Shift</a>
+        <a href="#work" class="hover:text-white transition-colors">Case Studies</a>
+        <a href="#process" class="hover:text-white transition-colors">Process</a>
+        <a href="#fit" class="hover:text-white transition-colors">Are You a Fit?</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+      </nav>
+      <a href="#book" data-booking-cta
+         class="glow-cta bg-iffort-pink hover:bg-pink-600 text-white text-sm font-bold px-5 py-2.5 rounded-full">
+        Book a Meeting
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" class="relative min-h-[92vh] flex items-center pt-24 pb-16 overflow-hidden">
+    <!-- Background video (desktop) -->
+    <video id="hero-video" autoplay muted playsinline preload="auto"
+           class="hero-video hidden md:block absolute inset-0 w-full h-full object-cover z-0 opacity-0">
+      <source src="assets/hero.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Readability overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-iffort-dark/85 via-iffort-dark/60 to-iffort-dark/90 z-[1] pointer-events-none"></div>
+
+    <!-- Fallback gradients (mobile + while video loads) -->
+    <div class="absolute -top-40 -right-40 w-[520px] h-[520px] bg-iffort-blue/10 rounded-full blur-3xl pointer-events-none z-0"></div>
+    <div class="absolute -bottom-40 -left-40 w-[520px] h-[520px] bg-iffort-pink/10 rounded-full blur-3xl pointer-events-none z-0"></div>
+
+    <!-- Interactive particle network -->
+    <canvas id="hero-particles" class="absolute inset-0 w-full h-full z-[2]" aria-hidden="true"></canvas>
+
+    <div class="relative max-w-5xl mx-auto px-6 text-center z-10">
+      <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur rounded-full px-4 py-1.5 text-xs uppercase tracking-widest text-gray-300 mb-8">
+        <span class="live-dot w-2 h-2 rounded-full bg-iffort-blue inline-block"></span>
+        Accepting a limited number of new partners
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-black leading-[1.05] mb-8">
+        Stop marketing.<br />
+        <span class="accent-gradient-text">Start engineering demand.</span>
+      </h1>
+
+      <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-6 leading-relaxed">
+        We build <span class="text-white font-semibold">AI-powered revenue engines</span> with attribution
+        you can defend in a board meeting. And no, <span class="text-white font-semibold">we don't work with everyone.</span>
+      </p>
+
+      <p class="text-sm uppercase tracking-widest text-gray-400 mb-10">
+        45,000+ qualified leads &middot; 5X ROAS &middot; ₹8.25 Cr+ attributed revenue
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#book" data-booking-cta
+           class="glow-cta bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full">
+          Book a Meeting &rarr;
+        </a>
+        <a href="#fit"
+           class="border border-white/20 hover:border-iffort-blue/60 hover:text-iffort-blue backdrop-blur text-gray-200 font-semibold text-lg px-10 py-4 rounded-full transition-colors">
+          See If You Qualify
+        </a>
+      </div>
+
+      <p class="mt-6 text-xs text-gray-400">
+        30 minutes. No pitch deck. Free funnel teardown either way.
+      </p>
+    </div>
+
+    <a href="#manifesto" class="scroll-chevron absolute bottom-6 left-1/2 text-gray-400 hover:text-white transition-colors z-10" aria-label="Scroll to next section">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+      </svg>
+    </a>
+  </section>
+
+  <!-- ============ CLIENT MARQUEE ============ -->
+  <section class="py-8 border-y border-white/5 bg-iffort-navy/40 overflow-hidden">
+    <p class="text-center text-xs uppercase tracking-widest text-gray-500 mb-5">Trusted by teams that outgrow their category</p>
+    <div class="marquee-track gap-16 text-2xl font-bold text-gray-600" aria-hidden="false">
+      <div class="flex gap-16 items-center shrink-0 px-8">
+        <span>SHRM</span><span>HP</span><span>KOGO</span><span>Circles.Life</span><span>Business Standard</span>
+        <span>Channelplay</span><span>Reckitt</span><span>PropertyGuru</span><span>Cowrks</span><span>Mozark</span>
+      </div>
+      <div class="flex gap-16 items-center shrink-0 px-8" aria-hidden="true">
+        <span>SHRM</span><span>HP</span><span>KOGO</span><span>Circles.Life</span><span>Business Standard</span>
+        <span>Channelplay</span><span>Reckitt</span><span>PropertyGuru</span><span>Cowrks</span><span>Mozark</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MANIFESTO / NARRATIVE ============ -->
+  <section id="manifesto" class="py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal max-w-3xl mb-12">
+        <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">The Shift</p>
+        <h2 class="text-4xl md:text-6xl font-black leading-tight mb-6">
+          The old playbook is <span class="text-iffort-pink line-through decoration-4">working</span> dead.
+        </h2>
+        <p class="text-xl text-gray-400 leading-relaxed">
+          Search is answered by AI before anyone clicks. Buyers ghost webinars. Awareness doesn't
+          survive a CFO review. We rebuilt the growth machine for that world.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-blue/40">
+          <div class="text-iffort-blue text-5xl font-black mb-4">01</div>
+          <h3 class="text-2xl font-bold mb-3">Be the answer, not the ad</h3>
+          <p class="text-gray-400 leading-relaxed">
+            AI-first SEO and GEO make your brand the citation when ChatGPT, Gemini, and Google
+            answer your buyer's question.
+          </p>
+        </div>
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-pink/40">
+          <div class="text-iffort-pink text-5xl font-black mb-4">02</div>
+          <h3 class="text-2xl font-bold mb-3">Pipeline, not impressions</h3>
+          <p class="text-gray-400 leading-relaxed">
+            Every campaign maps to ICPs and closes the loop with your CRM. Spend scales only when
+            lead quality is proven.
+          </p>
+        </div>
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-iffort-amber/40">
+          <div class="text-iffort-amber text-5xl font-black mb-4">03</div>
+          <h3 class="text-2xl font-bold mb-3">Attribution or it didn't happen</h3>
+          <p class="text-gray-400 leading-relaxed">
+            One source of truth from first touch to closed revenue. When we say 5X ROAS, it's
+            Salesforce-verified.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROOF / STATS + CASE STUDIES ============ -->
+  <section id="work" class="py-16 md:py-20 bg-iffort-navy/40 border-y border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal text-center mb-12">
+        <p class="text-iffort-pink text-sm font-bold uppercase tracking-widest mb-4">Receipts, not promises</p>
+        <h2 class="text-4xl md:text-5xl font-black mb-4">Case studies our clients take to the board</h2>
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto">Six industries, one pattern: measurable pipeline and revenue.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-14">
+        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-9 px-4">
+          <div class="gradient-text text-4xl md:text-5xl font-black mb-2 tabular-nums" data-count="45000" data-suffix="+">0+</div>
+          <p class="text-gray-400 text-sm">Qualified leads for a global HRTech giant</p>
+        </div>
+        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-9 px-4">
+          <div class="gradient-text text-4xl md:text-5xl font-black mb-2 tabular-nums" data-count="5" data-suffix="X">0X</div>
+          <p class="text-gray-400 text-sm">ROAS in under 12 months</p>
+        </div>
+        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-9 px-4">
+          <div class="gradient-text text-4xl md:text-5xl font-black mb-2 tabular-nums" data-count="8.25" data-decimals="2" data-prefix="₹" data-suffix=" Cr+">₹0 Cr+</div>
+          <p class="text-gray-400 text-sm">Attributed revenue, Salesforce-verified</p>
+        </div>
+        <div class="reveal text-center bg-white/5 border border-white/10 rounded-3xl py-9 px-4">
+          <div class="gradient-text text-4xl md:text-5xl font-black mb-2 tabular-nums" data-count="40" data-suffix="%">0%</div>
+          <p class="text-gray-400 text-sm">YoY growth across India &amp; MENA</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- SHRM -->
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-blue/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/hrtech.webp" alt="Global HRTech lead generation case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">HRTech &middot; Lead Gen &middot; India + MENA</p>
+            <h3 class="text-2xl font-bold mb-4">Scaling a global HR giant without diluting lead quality</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              Surgical ICP mapping and algorithmic budget governance scaled two very different
+              markets without losing control of cost per lead.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">45,000+</span> qualified leads</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">40%</span> YoY growth</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">₹1.3 Cr</span> budget optimized</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cowrks -->
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-pink/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/coworking.webp" alt="Premium coworking revenue engine case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">Real Estate &middot; Revenue Ops &middot; India</p>
+            <h3 class="text-2xl font-bold mb-4">From fragmented ad spend to a 5X revenue engine</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              We wired Salesforce to Google Ads and GA4, rebuilt the funnel end to end, and moved
+              budget to high-margin products.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">₹8.25 Cr+</span> attributed revenue</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">5X</span> ROAS</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">1,059</span> MQLs</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Mozark -->
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-amber/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/deeptech.webp" alt="Deep-tech rebranding case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">Deep-Tech &middot; Rebranding &middot; Global</p>
+            <h3 class="text-2xl font-bold mb-4">Rebranding a deep-tech player for enterprise dominance</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              A scalable 4-pillar brand framework took Mozark from startup look to enterprise-grade,
+              winning trust with Tier-1 telcos.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">Enterprise-grade</span> repositioning</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm">Faster <span class="text-iffort-amber font-bold">sales velocity</span></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- HP -->
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-blue/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/enterpriseit.webp" alt="Enterprise IT event content strategy case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-blue mb-3">Enterprise IT &middot; Content Strategy &middot; Events</p>
+            <h3 class="text-2xl font-bold mb-4">One voice for a global IT leader's flagship event</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              As Content Fulfillment Center, we built the event framework and creative bible that
+              aligned keynotes, editorial, and social into one voice.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">360°</span> content delivery</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-blue font-bold">Multi-region</span> stakeholder alignment</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Channelplay -->
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-pink/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/retail.webp" alt="Retail distribution B2B lead engine case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-pink mb-3">B2B Services &middot; ABM &middot; India + MENA</p>
+            <h3 class="text-2xl font-bold mb-4">From cold outreach to an inbound-authority lead engine</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              A unified engine across Google Search, LinkedIn, and ABM turned cold outreach into
+              daily inbound inquiries.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">Daily</span> inbound inquiries</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-pink font-bold">Predictable</span> SQL pipeline</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Reckitt -->
+        <article class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl overflow-hidden flex flex-col hover:border-iffort-amber/40">
+          <div class="overflow-hidden aspect-video">
+            <img src="assets/case-studies/hygiene.webp" alt="Global hygiene brand ABM and event marketing case study" loading="lazy" class="case-img w-full h-full object-cover" />
+          </div>
+          <div class="p-8 flex flex-col grow">
+            <p class="text-xs uppercase tracking-widest text-iffort-amber mb-3">FMCG &middot; ABM + Events &middot; UAE</p>
+            <h3 class="text-2xl font-bold mb-4">Filling a room with CXOs for a global hygiene brand</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              A 45-day multi-touch campaign of AI-powered data enrichment, LinkedIn ABM, and calling
+              put Hospitality and F&amp;B decision-makers in the room at DWTC.
+            </p>
+            <div class="mt-auto flex flex-wrap gap-3">
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">55+</span> qualified leads</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">15+</span> CXOs in the room</span>
+              <span class="bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-sm"><span class="text-iffort-amber font-bold">45-day</span> campaign</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="reveal text-center mt-10">
+        <a href="#book" data-booking-cta
+           class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full">
+          Want numbers like these? Book a Meeting &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section id="process" class="py-16 md:py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal max-w-3xl mb-10">
+        <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">How an engagement works</p>
+        <h2 class="text-4xl md:text-5xl font-black mb-6">No guesswork. A sequence.</h2>
+        <p class="text-xl text-gray-400">We find where your revenue engine is broken, then fix it in phases. Each one earns the next.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-blue mb-2">Phase 1 &middot; Weeks 1-3</p>
+          <h3 class="text-2xl font-bold mb-3">The Teardown</h3>
+          <p class="text-gray-400 leading-relaxed mb-4">
+            A fixed-scope audit of your funnel, attribution, ICPs, and channel economics.
+          </p>
+          <p class="text-sm text-gray-500">You get: a written teardown, a payback model, and an honest go/no-go.</p>
+        </div>
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-pink mb-2">Phase 2 &middot; Weeks 4-12</p>
+          <h3 class="text-2xl font-bold mb-3">Proof Sprints</h3>
+          <p class="text-gray-400 leading-relaxed mb-4">
+            Hypothesis-driven experiments across the channels the teardown flagged, reviewed weekly
+            on CPL, lead quality, and pipeline.
+          </p>
+          <p class="text-sm text-gray-500">You get: proven channels, killed losers, and a pipeline forming in your CRM.</p>
+        </div>
+        <div class="reveal tilt-card bg-white/5 border border-white/10 rounded-3xl p-8">
+          <p class="text-xs uppercase tracking-widest text-iffort-amber mb-2">Phase 3 &middot; Scale</p>
+          <h3 class="text-2xl font-bold mb-3">Scale &amp; Systemize</h3>
+          <p class="text-gray-400 leading-relaxed mb-4">
+            Budgets scale only behind proven ICP alignment, the same governance that took SHRM to
+            45,000+ leads and Cowrks to 5X ROAS.
+          </p>
+          <p class="text-sm text-gray-500">You get: a compounding engine, documented playbooks, and numbers your CFO signs off on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FIT / QUALIFICATION ============ -->
+  <section id="fit" class="py-16 md:py-20 bg-iffort-navy/40 border-y border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal max-w-3xl mb-10">
+        <p class="text-iffort-pink text-sm font-bold uppercase tracking-widest mb-4">We choose our partners carefully</p>
+        <h2 class="text-4xl md:text-5xl font-black mb-6">We don't work with everyone.<br />Here's how to know if that's you.</h2>
+        <p class="text-xl text-gray-400">
+          Every result on this page came from a partnership where both sides were all-in.
+          We keep it that way by saying no more often than yes.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="reveal tilt-card bg-iffort-dark border border-iffort-blue/30 rounded-3xl p-8 md:p-10">
+          <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-iffort-blue/20 text-iffort-blue flex items-center justify-center text-lg">✓</span>
+            You're a strong fit if…
+          </h3>
+          <ul class="space-y-4 text-gray-300">
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You're a <strong class="text-white">B2B or enterprise-facing business</strong> with a proven offer and real customers.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You have a <strong class="text-white">sales team ready to work qualified pipeline.</strong></span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You think in <strong class="text-white">payback and pipeline,</strong> and you'll share CRM access so attribution is real.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>You can commit to <strong class="text-white">at least two quarters.</strong> Engines compound; stunts don't.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-blue mt-1">&#9656;</span><span>Leadership is <strong class="text-white">at the table,</strong> with founder or CXO sponsorship.</span></li>
+          </ul>
+        </div>
+
+        <div class="reveal tilt-card bg-iffort-dark border border-white/10 rounded-3xl p-8 md:p-10">
+          <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-iffort-pink/20 text-iffort-pink flex items-center justify-center text-lg">✕</span>
+            We'll pass if…
+          </h3>
+          <ul class="space-y-4 text-gray-400">
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You're pre-revenue or still searching for product-market fit.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You want followers, virality, or awards, not pipeline.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You need a miracle this month. We won't promise overnight.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>Marketing is a cost center and every rupee needs three approvals.</span></li>
+            <li class="flex gap-3"><span class="text-iffort-pink mt-1">&#9656;</span><span>You won't share data. Without it we'd be guessing, and we don't guess.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="reveal text-center text-gray-400 mt-10 text-lg">
+        Not sure which column you're in? That's literally what the meeting is for.
+        <a href="#book" data-booking-cta class="text-iffort-blue font-semibold hover:underline">Book it &rarr;</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="reveal mb-10">
+        <p class="text-iffort-blue text-sm font-bold uppercase tracking-widest mb-4">Straight answers</p>
+        <h2 class="text-4xl md:text-5xl font-black mb-5">Questions serious buyers ask us</h2>
+        <p class="text-xl text-gray-400">If your question isn't here, bring it to the meeting, or email
+          <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.
+        </p>
+      </div>
+
+      <div class="reveal space-y-4">
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            Do you really turn clients away?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            Yes, regularly. Every case study here came from an engagement with real CRM access, a
+            working sales team, and leadership in the room. If the teardown says we're not the right
+            partner, we tell you in week one.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            What kind of returns can we actually expect?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            Anyone quoting a return before seeing your data is guessing. Our track record: 5X ROAS
+            and ₹8.25 Cr+ attributed revenue for Cowrks, 45,000+ qualified leads at 40% YoY for SHRM.
+            Phase 1 builds a payback model for your business before you commit further.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            Do you guarantee results?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            No, and you should run from anyone who does. What we guarantee is the system: a fixed-scope
+            teardown, sprints that kill losers fast, and spend that scales only behind proven lead quality.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            How fast will we see something?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            First signals show inside 30 to 45 days of sprints going live. Real compounding takes two
+            quarters. If you need revenue this month to survive, we're the wrong call and we'll say so.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            Why not just hire an in-house marketing team?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            You probably should, eventually. A senior hire takes six-plus months to ramp; we plug in
+            senior operators from day one, then document the playbooks so the engine is yours to run.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            Can you work with our existing marketing team?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            That's our favorite setup. We're force multipliers, not replacements: we bring strategy,
+            attribution, and channel expertise; your team brings product depth.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            How do you price engagements?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            Phase 1 is fixed-scope and fixed-price. Ongoing engagements are scoped from the teardown
+            and sized to your pipeline math. No percentage-of-ad-spend models.
+          </div>
+        </details>
+
+        <details class="faq bg-white/5 border border-white/10 rounded-2xl px-6 md:px-8">
+          <summary class="flex items-center justify-between gap-6 py-6 text-lg font-bold text-gray-200">
+            What actually happens in the first meeting?
+            <span class="faq-icon shrink-0 text-iffort-pink text-2xl font-light">+</span>
+          </summary>
+          <div class="pb-6 text-gray-400 leading-relaxed">
+            Thirty minutes, no deck, no juniors. You walk us through your funnel; we show you where
+            demand is leaking, what we'd test first, and whether we're the right partner. You keep
+            the teardown either way.
+          </div>
+        </details>
+      </div>
+
+      <div class="reveal text-center mt-10">
+        <a href="#book" data-booking-cta
+           class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-10 py-4 rounded-full">
+          Ask us the hard questions live &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BOOKING / SECURE LEAD GATE ============ -->
+  <section id="book" class="py-16 md:py-20 bg-iffort-navy/40 border-y border-white/5">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="reveal text-center mb-10">
+        <p class="text-iffort-pink text-sm font-bold uppercase tracking-widest mb-4">The Only CTA That Matters</p>
+        <h2 class="text-4xl md:text-6xl font-black mb-6">Book a Meeting</h2>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+          30 minutes with our strategy team. You bring the funnel, we bring the teardown,
+          and you get a straight answer on fit.
+        </p>
+      </div>
+
+      <!-- Secure lead gate -->
+      <div id="lead-gate" class="reveal bg-iffort-dark border border-white/10 rounded-3xl p-8 md:p-12">
+        <div class="flex items-center gap-3 mb-8">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-iffort-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+          </svg>
+          <p class="text-sm text-gray-400">
+            <span class="text-white font-semibold">Secure access.</span>
+            Your details are encrypted in transit (HTTPS/TLS), used only to prepare and confirm your meeting, and never sold or shared.
+          </p>
+        </div>
+
+        <form id="lead-form" class="space-y-6" novalidate>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label for="lead-name" class="text-sm font-medium text-gray-300">Full name</label>
+              <input type="text" id="lead-name" name="name" required autocomplete="name"
+                     class="w-full bg-iffort-navy border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-iffort-pink focus:ring-1 focus:ring-iffort-pink transition-all placeholder:text-gray-600"
+                     placeholder="Jane Doe" />
+            </div>
+            <div class="space-y-2">
+              <label for="lead-company" class="text-sm font-medium text-gray-300">Company</label>
+              <input type="text" id="lead-company" name="company" required autocomplete="organization"
+                     class="w-full bg-iffort-navy border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-iffort-pink focus:ring-1 focus:ring-iffort-pink transition-all placeholder:text-gray-600"
+                     placeholder="Acme Corp" />
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label for="lead-email" class="text-sm font-medium text-gray-300">Work email</label>
+            <input type="email" id="lead-email" name="email" required autocomplete="email"
+                   class="w-full bg-iffort-navy border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-iffort-pink focus:ring-1 focus:ring-iffort-pink transition-all placeholder:text-gray-600"
+                   placeholder="jane@company.com" />
+          </div>
+
+          <label class="flex items-start gap-3 cursor-pointer select-none">
+            <input type="checkbox" id="lead-consent" required
+                   class="mt-1 w-4 h-4 rounded border-white/20 bg-iffort-navy accent-[#FF2E63]" />
+            <span class="text-sm text-gray-400">
+              I agree to the <a href="#terms" class="text-iffort-blue hover:underline">Terms &amp; Conditions</a> and
+              <a href="https://www.iffort.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="text-iffort-blue hover:underline">Privacy Policy</a>,
+              and consent to Iffort contacting me about my inquiry.
+            </span>
+          </label>
+
+          <p id="lead-error" class="hidden text-sm text-red-400"></p>
+
+          <button type="submit" id="lead-submit"
+                  class="glow-cta w-full bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg py-4 rounded-xl">
+            Unlock the Calendar &rarr;
+          </button>
+
+          <p class="text-xs text-gray-500 text-center">
+            Prefer email? Business inquiries:
+            <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Calendar revealed after the gate -->
+      <div id="calendar-panel" class="hidden bg-iffort-dark border border-white/10 rounded-3xl p-8 md:p-12 text-center">
+        <div class="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-3">You're in. Pick a time that works.</h3>
+        <p class="text-gray-400 mb-8">Grab any open slot below. The invite lands in your inbox instantly.</p>
+        <a id="booking-link" href="#" target="_blank" rel="noopener noreferrer"
+           class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-12 py-4 rounded-full mb-10">
+          Open Booking Calendar &rarr;
+        </a>
+        <!-- Inline Calendly embed (loads only after consent) -->
+        <div id="calendly-inline" class="rounded-2xl overflow-hidden bg-white/5" style="min-height:660px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TERMS & CONDITIONS (collapsible) ============ -->
+  <section id="terms" class="py-14">
+    <div class="max-w-4xl mx-auto px-6">
+      <details class="faq bg-white/5 border border-white/10 rounded-3xl px-8 md:px-10">
+        <summary class="flex items-center justify-between gap-6 py-7">
+          <span class="text-2xl md:text-3xl font-black">Terms &amp; Conditions</span>
+          <span class="faq-icon shrink-0 text-iffort-pink text-3xl font-light">+</span>
+        </summary>
+        <div class="space-y-6 text-gray-400 text-sm leading-relaxed pb-8">
+          <div>
+            <h3 class="text-white font-bold mb-2">1. Who we are</h3>
+            <p>This page is operated by Iffort, a global digital growth consultancy with offices in India, UAE, and Canada. For business inquiries, contact <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">2. Your data &amp; secure access</h3>
+            <p>Details you submit through this page (name, company, work email) are transmitted over an encrypted HTTPS/TLS connection and used solely to schedule and prepare your meeting, and to respond to your inquiry. We do not sell, rent, or trade your personal information. You may request deletion of your data at any time by emailing <a href="mailto:daksh.sharma@iffort.com" class="text-iffort-blue hover:underline">daksh.sharma@iffort.com</a>.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">3. Meeting bookings</h3>
+            <p>Booking a meeting is free and carries no obligation. Meetings are consultative; nothing discussed constitutes a binding proposal until confirmed in a signed agreement. Scheduling is handled by a third-party calendar provider, which is subject to its own terms and privacy policy.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">4. Performance figures</h3>
+            <p>Case study results shown on this page (including lead volumes, ROAS, and revenue figures) are historical outcomes achieved for specific clients under specific conditions. They are illustrative and not a guarantee of future results for your business. Iffort accepts engagements selectively and reserves the right to decline any inquiry.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">5. Communications consent</h3>
+            <p>By submitting the form with the consent box checked, you agree that Iffort may contact you by email or phone regarding your inquiry. You can opt out at any time via the unsubscribe link in our emails or by writing to us.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-bold mb-2">6. Full legal terms</h3>
+            <p>These highlights supplement, and do not replace, our full
+              <a href="https://www.iffort.com/terms-conditions/" target="_blank" rel="noopener noreferrer" class="text-iffort-blue hover:underline">Terms &amp; Conditions</a> and
+              <a href="https://www.iffort.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="text-iffort-blue hover:underline">Privacy Policy</a>.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="py-16 text-center grid-bg border-t border-white/5">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-black mb-6">
+        Growth is either engineered<br />
+        <span class="accent-gradient-text">or accidental.</span>
+      </h2>
+      <p class="text-gray-400 text-lg mb-2">We take on a limited number of partners. The teardown is free either way.</p>
+      <a href="#book" data-booking-cta
+         class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-12 py-4 rounded-full mt-4">
+        Book a Meeting &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-iffort-navy border-t border-white/5 py-12">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-10 mb-10">
+        <div>
+          <p class="text-2xl font-extrabold mb-3">iffort<span class="text-iffort-pink">.</span></p>
+          <p class="text-gray-500 text-sm leading-relaxed">Precision execution. Real-world results. AI, technology, and digital marketing, engineered into one growth machine.</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">Business Inquiries</p>
+          <a href="mailto:daksh.sharma@iffort.com" class="text-lg text-white hover:text-iffort-blue transition-colors">daksh.sharma@iffort.com</a>
+          <p class="text-gray-500 text-sm mt-4">Offices: Noida (India) &middot; Sharjah (UAE) &middot; Oshawa (Canada)</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">Legal</p>
+          <div class="flex flex-col gap-2 text-sm text-gray-400">
+            <a href="#terms" class="hover:text-white transition-colors">Terms &amp; Conditions</a>
+            <a href="https://www.iffort.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="https://linkedin.com/company/iffort" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <p class="text-gray-600 text-sm border-t border-white/5 pt-8">&copy; <span id="year"></span> Iffort. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- FAQ structured data for search engines / AI answers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you really turn clients away?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, regularly. Every case study came from an engagement with real CRM access, a sales team that works the pipeline, and leadership that shows up. If the teardown says we're not the right partner, we say so in week one." }
+      },
+      {
+        "@type": "Question",
+        "name": "What kind of returns can we expect?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Returns depend on deal size, sales cycle, and starting funnel. Our track record: 5X ROAS and ₹8.25 Cr+ attributed revenue for Cowrks, 45,000+ qualified leads at 40% YoY growth for SHRM. Phase 1 builds a payback model specific to your business before you commit further." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you guarantee results?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No, and you should run from anyone who does. We guarantee the system: a fixed-scope teardown with a go/no-go recommendation, hypothesis-driven sprints, and spend that scales only behind proven lead quality." }
+      },
+      {
+        "@type": "Question",
+        "name": "How fast will we see results?",
+        "acceptedAnswer": { "@type": "Answer", "text": "First signals typically show inside 30 to 45 days of sprints going live. Real compounding takes two quarters." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you work with our existing marketing team?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We're force multipliers, not replacements. We bring strategy, attribution infrastructure, and channel expertise; your team brings product depth." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you price engagements?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Phase 1 is fixed-scope and fixed-price. Ongoing engagements are scoped from the teardown and sized to your pipeline math. No percentage-of-ad-spend models." }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    // ── CONFIG ─────────────────────────────────────────────────────────────
+    // Replace with the live scheduling link (Calendly / Google appointment
+    // schedule / HubSpot Meetings). Every CTA on the page reads from here.
+    const BOOKING_URL = 'https://calendly.com/dakshsharma';
+
+    // Lead-capture endpoint from the main site. Optional: if this page is
+    // deployed standalone without the API, the calendar still unlocks.
+    const LEAD_ENDPOINT = '/api/send-email';
+    // ───────────────────────────────────────────────────────────────────────
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('booking-link').href = BOOKING_URL;
+
+    // Hero video: fade in when ready, pause on the 4s hold frame like the main site
+    const heroVideo = document.getElementById('hero-video');
+    if (heroVideo && !reducedMotion) {
+      heroVideo.addEventListener('loadeddata', () => heroVideo.classList.remove('opacity-0'));
+      heroVideo.addEventListener('timeupdate', () => {
+        if (heroVideo.currentTime >= 4) heroVideo.pause();
+      });
+    }
+
+    // Scroll progress bar
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+      progressBar.style.width = (scrolled * 100) + '%';
+    }, { passive: true });
+
+    // Interactive particle network in the hero
+    (function initParticles() {
+      if (reducedMotion) return;
+      const canvas = document.getElementById('hero-particles');
+      const ctx = canvas.getContext('2d');
+      const colors = ['rgba(0,201,255,', 'rgba(255,46,99,', 'rgba(255,159,28,'];
+      let particles = [];
+      let mouse = { x: -9999, y: -9999 };
+      let raf;
+
+      function resize() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        const count = Math.min(90, Math.floor(canvas.width / 16));
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 1.8 + 0.6,
+          c: colors[Math.floor(Math.random() * colors.length)]
+        }));
+      }
+
+      function step() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const p of particles) {
+          // Gentle drift plus repulsion from the cursor
+          const dx = p.x - mouse.x, dy = p.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 140) {
+            p.vx += (dx / dist) * 0.06;
+            p.vy += (dy / dist) * 0.06;
+          }
+          p.vx = Math.max(-0.8, Math.min(0.8, p.vx));
+          p.vy = Math.max(-0.8, Math.min(0.8, p.vy));
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.c + '0.7)';
+          ctx.fill();
+        }
+        // Connect nearby particles
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i], b = particles[j];
+            const d = Math.hypot(a.x - b.x, a.y - b.y);
+            if (d < 110) {
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = 'rgba(0,201,255,' + (0.14 * (1 - d / 110)) + ')';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          }
+        }
+        raf = requestAnimationFrame(step);
+      }
+
+      const hero = document.getElementById('top');
+      hero.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+      window.addEventListener('resize', resize);
+
+      // Only animate while the hero is on screen
+      new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { resize(); step(); }
+          else cancelAnimationFrame(raf);
+        });
+      }, { threshold: 0.05 }).observe(canvas);
+    })();
+
+    // Scroll-reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Count-up animation for stat numbers
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        countObserver.unobserve(entry.target);
+        const el = entry.target;
+        const target = parseFloat(el.dataset.count);
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        if (reducedMotion) {
+          el.textContent = prefix + target.toLocaleString('en-IN', { minimumFractionDigits: decimals }) + suffix;
+          return;
+        }
+        const duration = 1600;
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          const val = target * eased;
+          el.textContent = prefix + val.toLocaleString('en-IN', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-count]').forEach((el) => countObserver.observe(el));
+
+    // 3D tilt on cards
+    if (!reducedMotion && window.matchMedia('(hover: hover)').matches) {
+      document.querySelectorAll('.tilt-card').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width - 0.5;
+          const py = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = 'perspective(900px) rotateX(' + (-py * 5) + 'deg) rotateY(' + (px * 5) + 'deg) translateY(-2px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    }
+
+    // Secure lead gate: capture + consent, then unlock the calendar
+    const form = document.getElementById('lead-form');
+    const errorEl = document.getElementById('lead-error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+
+      const name = document.getElementById('lead-name').value.trim();
+      const company = document.getElementById('lead-company').value.trim();
+      const email = document.getElementById('lead-email').value.trim();
+      const consent = document.getElementById('lead-consent').checked;
+
+      if (!name || !company || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.textContent = 'Please fill in your name, company, and a valid work email.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+      if (!consent) {
+        errorEl.textContent = 'Please accept the Terms & Conditions to continue.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const btn = document.getElementById('lead-submit');
+      btn.disabled = true;
+      btn.textContent = 'Unlocking…';
+
+      // Best-effort lead capture; the calendar unlocks even if the API
+      // is unavailable (e.g. static standalone deployment).
+      try {
+        await fetch(LEAD_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            phone: '',
+            service: 'Book a Meeting (Landing v2)',
+            message: `Booking-calendar lead from landing-v2. Company: ${company}. Consent to T&C: yes.`
+          })
+        });
+      } catch (_) { /* non-blocking */ }
+
+      // Reveal calendar
+      document.getElementById('lead-gate').classList.add('hidden');
+      const panel = document.getElementById('calendar-panel');
+      panel.classList.remove('hidden');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Load Calendly inline widget on demand, pre-filled with lead details
+      const embedUrl = BOOKING_URL
+        + (BOOKING_URL.includes('?') ? '&' : '?')
+        + 'hide_gdpr_banner=1&name=' + encodeURIComponent(name)
+        + '&email=' + encodeURIComponent(email)
+        + '&background_color=020617&text_color=ffffff&primary_color=FF2E63';
+
+      if (BOOKING_URL.includes('calendly.com')) {
+        const s = document.createElement('script');
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.async = true;
+        s.onload = () => {
+          Calendly.initInlineWidget({
+            url: embedUrl,
+            parentElement: document.getElementById('calendly-inline')
+          });
+        };
+        document.body.appendChild(s);
+      } else {
+        // Non-Calendly providers: fall back to a plain iframe embed
+        const iframe = document.createElement('iframe');
+        iframe.src = embedUrl;
+        iframe.title = 'Booking calendar';
+        iframe.style.cssText = 'width:100%;height:660px;border:0;';
+        document.getElementById('calendly-inline').appendChild(iframe);
+      }
+    });
+
+    // If the gate was already passed in this session, footer/nav CTAs still
+    // scroll to the booking section where the calendar is now visible.
+    document.querySelectorAll('[data-booking-cta]').forEach((a) => {
+      a.addEventListener('click', () => {
+        const panel = document.getElementById('calendar-panel');
+        if (!panel.classList.contains('hidden')) {
+          setTimeout(() => panel.scrollIntoView({ behavior: 'smooth' }), 50);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
