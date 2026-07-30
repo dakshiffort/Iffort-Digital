@@ -151,6 +151,22 @@
     }
     .float-slow { animation: floatY 5s ease-in-out infinite; }
 
+    /* Testimonial screenshot marquee: slow, pauses on hover */
+    .testi-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 55s linear infinite;
+    }
+    .testi-marquee:hover .testi-track,
+    .testi-marquee:focus-within .testi-track { animation-play-state: paused; }
+    .testi-card {
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .testi-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+    }
+
     /* FAQ + T&C accordion */
     details.faq summary { list-style: none; cursor: pointer; }
     details.faq summary::-webkit-details-marker { display: none; }
@@ -160,6 +176,9 @@
 
     @media (prefers-reduced-motion: reduce) {
       .marquee-track, .live-dot, .scroll-chevron, .float-slow { animation: none !important; }
+      .testi-track { animation: none !important; }
+      .testi-marquee { overflow-x: auto !important; }
+      .testi-card { transition: none !important; }
       .reveal { opacity: 1 !important; animation: none !important; }
       .spark { stroke-dashoffset: 0 !important; animation: none !important; }
       .spark-dot { opacity: 1 !important; animation: none !important; }
@@ -531,6 +550,51 @@
           </p>
           <p class="text-sm text-gray-500">You get: a compounding engine, documented playbooks, and numbers your CFO signs off on.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS / SCREENSHOT WALL ============ -->
+  <section id="wall" class="relative py-16 md:py-20 bg-iffort-navy/40 border-y border-white/5 overflow-hidden hidden">
+    <div class="relative max-w-6xl mx-auto px-6 mb-10">
+      <p class="text-iffort-amber text-sm font-bold uppercase tracking-widest mb-4">Receipts, unfiltered</p>
+      <h2 class="text-4xl md:text-5xl font-black mb-5">Don't take our word for it</h2>
+      <blockquote class="max-w-3xl">
+        <p class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-3">"#SHRMIAC25 was a massive lift for
+          all of us, and having <span class="text-white font-semibold">Iffort as a dependable digital partner</span>
+          made a real difference."</p>
+        <footer class="text-sm text-gray-500">Senior Director &amp; Head, Marketing &amp; Communications, SHRM &middot; public LinkedIn comment</footer>
+      </blockquote>
+      <p class="text-sm text-gray-500 mt-6">Real messages and live dashboards, exactly as they arrived. Hover to pause, click any card to zoom.</p>
+    </div>
+
+    <div class="testi-marquee overflow-hidden" aria-label="Client testimonial screenshots">
+      <div class="testi-track gap-6 px-6">
+        <!-- Copy A -->
+        <div class="flex gap-6 items-stretch shrink-0" data-testi-set>
+          <button type="button" class="testi-card shrink-0 bg-iffort-dark border border-white/10 hover:border-iffort-blue/50 rounded-2xl overflow-hidden text-left" data-zoom aria-label="Zoom LinkedIn post screenshot">
+            <p class="flex items-center gap-2 px-4 py-2.5 text-xs text-gray-400"><span class="w-2 h-2 rounded-full bg-[#0A66C2]"></span>LinkedIn &middot; SHRM leadership</p>
+            <img src="assets/testimonials/linkedin-shrm.png" alt="LinkedIn comment from SHRM marketing leadership thanking Iffort" class="h-[320px] w-auto object-cover object-top" />
+          </button>
+          <button type="button" class="testi-card shrink-0 bg-iffort-dark border border-white/10 hover:border-iffort-blue/50 rounded-2xl overflow-hidden text-left" data-zoom aria-label="Zoom LinkedIn Ads dashboard screenshot">
+            <p class="flex items-center gap-2 px-4 py-2.5 text-xs text-gray-400"><span class="w-2 h-2 rounded-full bg-iffort-blue"></span>LinkedIn Ads &middot; live dashboard &middot; 41,321 leads</p>
+            <img src="assets/testimonials/ads-india.png" alt="LinkedIn Campaign Manager dashboard showing 41,321 leads at ₹468 cost per lead" class="h-[320px] w-auto object-cover object-top" />
+          </button>
+          <button type="button" class="testi-card shrink-0 bg-iffort-dark border border-white/10 hover:border-iffort-pink/50 rounded-2xl overflow-hidden text-left" data-zoom aria-label="Zoom client WhatsApp screenshot">
+            <p class="flex items-center gap-2 px-4 py-2.5 text-xs text-gray-400"><span class="w-2 h-2 rounded-full bg-[#25D366]"></span>WhatsApp &middot; client, unprompted</p>
+            <img src="assets/testimonials/whatsapp-client.png" alt="WhatsApp message from a client praising the Iffort team's work" class="h-[320px] w-auto object-cover object-top" />
+          </button>
+          <button type="button" class="testi-card shrink-0 bg-iffort-dark border border-white/10 hover:border-iffort-blue/50 rounded-2xl overflow-hidden text-left" data-zoom aria-label="Zoom LinkedIn Ads MENA dashboard screenshot">
+            <p class="flex items-center gap-2 px-4 py-2.5 text-xs text-gray-400"><span class="w-2 h-2 rounded-full bg-iffort-blue"></span>LinkedIn Ads &middot; MENA &middot; 15,381 leads</p>
+            <img src="assets/testimonials/ads-mena.png" alt="LinkedIn Campaign Manager dashboard for MENA showing 15,381 leads" class="h-[320px] w-auto object-cover object-top" />
+          </button>
+          <button type="button" class="testi-card shrink-0 bg-iffort-dark border border-white/10 hover:border-iffort-amber/50 rounded-2xl overflow-hidden text-left" data-zoom aria-label="Zoom client email screenshot">
+            <p class="flex items-center gap-2 px-4 py-2.5 text-xs text-gray-400"><span class="w-2 h-2 rounded-full bg-iffort-amber"></span>Email &middot; Max Group partnership note</p>
+            <img src="assets/testimonials/email-maxgroup.png" alt="Email from Max Group thanking Iffort for years of partnership" class="h-[320px] w-auto object-cover object-top" />
+          </button>
+        </div>
+        <!-- Copy B (seamless loop) -->
+        <div class="flex gap-6 items-stretch shrink-0" data-testi-set aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -912,6 +976,13 @@
     </div>
   </footer>
 
+  <!-- Screenshot lightbox -->
+  <div id="lightbox" class="hidden fixed inset-0 z-[80] bg-black/85 backdrop-blur-sm items-center justify-center p-6" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+    <button id="lightbox-close" type="button" aria-label="Close preview"
+            class="absolute top-5 right-6 text-gray-300 hover:text-white text-4xl font-light leading-none">&times;</button>
+    <img id="lightbox-img" src="" alt="Testimonial screenshot, enlarged" class="max-h-[88vh] max-w-full rounded-xl border border-white/20 shadow-2xl" />
+  </div>
+
   <!-- FAQ structured data for search engines / AI answers -->
   <script type="application/ld+json">
   {
@@ -1119,6 +1190,58 @@
         });
       });
     }
+
+    // Testimonial wall: show the section only for screenshots that exist,
+    // duplicate them for a seamless loop, and zoom on click.
+    (function initTestimonials() {
+      const section = document.getElementById('wall');
+      const [setA, setB] = section.querySelectorAll('[data-testi-set]');
+      const cards = [...setA.querySelectorAll('.testi-card')];
+      let pending = cards.length;
+
+      function settle() {
+        if (--pending > 0) return;
+        const alive = setA.querySelectorAll('.testi-card').length;
+        if (!alive) return; // no screenshots yet: section stays hidden
+        setB.innerHTML = setA.innerHTML;
+        section.classList.remove('hidden');
+        // A short row should not look sparse: widen the loop by doubling again
+        if (alive < 4) setB.innerHTML += setA.innerHTML;
+      }
+
+      cards.forEach((card) => {
+        const img = card.querySelector('img');
+        if (img.complete && img.naturalWidth > 0) { settle(); return; }
+        img.addEventListener('load', settle);
+        img.addEventListener('error', () => { card.remove(); settle(); });
+      });
+
+      // Lightbox
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+      }
+      function closeLightbox() {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        lightboxImg.src = '';
+      }
+      section.addEventListener('click', (e) => {
+        const card = e.target.closest('[data-zoom]');
+        if (!card) return;
+        const img = card.querySelector('img');
+        openLightbox(img.src, img.alt);
+      });
+      lightbox.addEventListener('click', closeLightbox);
+      document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    })();
 
     // Secure lead gate: capture + consent, then unlock the calendar
     const form = document.getElementById('lead-form');
