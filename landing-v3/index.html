@@ -196,8 +196,8 @@
   <!-- ============ NAVBAR ============ -->
   <header class="fixed top-0 inset-x-0 z-50 bg-iffort-dark/80 backdrop-blur-lg border-b border-white/5">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="#top" class="text-2xl font-extrabold tracking-tight">
-        iffort<span class="text-iffort-pink">.</span>
+      <a href="#top" class="flex items-center" aria-label="Iffort home">
+        <img src="assets/iffort-logo-white.png" alt="Iffort" class="h-7 w-auto" />
       </a>
       <nav class="hidden md:flex items-center gap-7 text-sm text-gray-300">
         <a href="#manifesto" class="hover:text-white transition-colors">The Shift</a>
@@ -801,18 +801,37 @@
                      placeholder="Jane Doe" />
             </div>
             <div class="space-y-2">
-              <label for="lead-company" class="text-sm font-medium text-gray-300">Company</label>
-              <input type="text" id="lead-company" name="company" required autocomplete="organization"
+              <label for="lead-email" class="text-sm font-medium text-gray-300">Work email</label>
+              <input type="email" id="lead-email" name="email" required autocomplete="email"
                      class="w-full bg-iffort-navy border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-iffort-pink focus:ring-1 focus:ring-iffort-pink transition-all placeholder:text-gray-600"
-                     placeholder="Acme Corp" />
+                     placeholder="jane@company.com" />
             </div>
           </div>
 
           <div class="space-y-2">
-            <label for="lead-email" class="text-sm font-medium text-gray-300">Work email</label>
-            <input type="email" id="lead-email" name="email" required autocomplete="email"
-                   class="w-full bg-iffort-navy border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-iffort-pink focus:ring-1 focus:ring-iffort-pink transition-all placeholder:text-gray-600"
-                   placeholder="jane@company.com" />
+            <label for="lead-help" class="text-sm font-medium text-gray-300">What do you need help with?</label>
+            <div class="relative">
+              <select id="lead-help" name="help" required
+                      class="w-full bg-iffort-navy border border-white/10 rounded-xl px-4 py-3 text-white appearance-none focus:outline-none focus:border-iffort-pink focus:ring-1 focus:ring-iffort-pink transition-all">
+                <option value="" disabled selected>Select the closest fit</option>
+                <option value="Demand &amp; Lead Generation">Demand &amp; Lead Generation</option>
+                <option value="AI-Powered SEO &amp; GEO">AI-Powered SEO &amp; GEO</option>
+                <option value="Content &amp; GTM Strategy">Content &amp; GTM Strategy</option>
+                <option value="B2B Video Production">B2B Video Production</option>
+                <option value="Full-funnel growth engine">Full-funnel growth engine</option>
+                <option value="Not sure yet">Not sure yet, let's talk</option>
+              </select>
+              <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label for="lead-message" class="text-sm font-medium text-gray-300">Tell us a bit more</label>
+            <textarea id="lead-message" name="message" rows="4" required
+                      class="w-full bg-iffort-navy border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-iffort-pink focus:ring-1 focus:ring-iffort-pink transition-all resize-none placeholder:text-gray-600"
+                      placeholder="Your company, current funnel, monthly budget, timeline, or the one number you want to move."></textarea>
           </div>
 
           <label class="flex items-start gap-3 cursor-pointer select-none">
@@ -829,7 +848,7 @@
 
           <button type="submit" id="lead-submit"
                   class="glow-cta w-full bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg py-4 rounded-xl">
-            Unlock the Calendar &rarr;
+            Request My Meeting &rarr;
           </button>
 
           <p class="text-xs text-gray-500 text-center">
@@ -846,8 +865,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
         </div>
-        <h3 class="text-2xl font-bold mb-3">You're in. Pick a time that works.</h3>
-        <p class="text-gray-400 mb-8">Grab any open slot below. The invite lands in your inbox instantly.</p>
+        <h3 id="thankyou-heading" class="text-2xl font-bold mb-3">Thank you! Your request is in.</h3>
+        <p class="text-gray-400 mb-8 max-w-lg mx-auto">Our team has been notified and will reach out shortly. Want to lock in a time now? Pick any open slot below and the invite lands in your inbox instantly.</p>
         <a id="booking-link" href="#" target="_blank" rel="noopener noreferrer"
            class="glow-cta inline-block bg-iffort-pink hover:bg-pink-600 text-white font-bold text-lg px-12 py-4 rounded-full mb-10">
           Open Booking Calendar &rarr;
@@ -959,7 +978,7 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-3 gap-10 mb-10">
         <div>
-          <p class="text-2xl font-extrabold mb-3">iffort<span class="text-iffort-pink">.</span></p>
+          <img src="assets/iffort-logo-white.png" alt="Iffort" class="h-8 w-auto mb-4" />
           <p class="text-gray-500 text-sm leading-relaxed">Precision execution. Real-world results. AI, technology, and digital marketing, engineered into one growth machine.</p>
         </div>
         <div>
@@ -1258,12 +1277,23 @@
       errorEl.classList.add('hidden');
 
       const name = document.getElementById('lead-name').value.trim();
-      const company = document.getElementById('lead-company').value.trim();
       const email = document.getElementById('lead-email').value.trim();
+      const help = document.getElementById('lead-help').value;
+      const message = document.getElementById('lead-message').value.trim();
       const consent = document.getElementById('lead-consent').checked;
 
-      if (!name || !company || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        errorEl.textContent = 'Please fill in your name, company, and a valid work email.';
+      if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.textContent = 'Please fill in your name and a valid work email.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+      if (!help) {
+        errorEl.textContent = 'Please choose what you need help with.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+      if (!message) {
+        errorEl.textContent = 'Please tell us a bit more so we can prepare.';
         errorEl.classList.remove('hidden');
         return;
       }
@@ -1275,10 +1305,11 @@
 
       const btn = document.getElementById('lead-submit');
       btn.disabled = true;
-      btn.textContent = 'Unlocking…';
+      btn.textContent = 'Sending…';
 
-      // Best-effort lead capture; the calendar unlocks even if the API
-      // is unavailable (e.g. static standalone deployment).
+      // Send the lead so the team is alerted by email. Non-blocking: if the
+      // API is unavailable (e.g. static host with no function), the visitor
+      // still gets the thank-you and can book a time.
       try {
         await fetch(LEAD_ENDPOINT, {
           method: 'POST',
@@ -1287,11 +1318,15 @@
             name,
             email,
             phone: '',
-            service: 'Book a Meeting (Landing v2)',
-            message: `Booking-calendar lead from landing-v2. Company: ${company}. Consent to T&C: yes.`
+            service: help,
+            message: `${message}\n\n— Meeting request from the Book a Meeting landing page. Consent to T&C: yes.`
           })
         });
       } catch (_) { /* non-blocking */ }
+
+      // Personalise the thank-you with the visitor's first name
+      const firstName = name.split(' ')[0];
+      document.getElementById('thankyou-heading').textContent = `Thank you, ${firstName}! Your request is in.`;
 
       // Reveal calendar
       document.getElementById('lead-gate').classList.add('hidden');

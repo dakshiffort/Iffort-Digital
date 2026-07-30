@@ -1,0 +1,10 @@
+{
+  "name": "iffort-book-a-meeting",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Iffort Book a Meeting ad-campaign landing page with Calendly booking and lead alerts",
+  "dependencies": {
+    "resend": "^6.6.0"
+  }
+}
